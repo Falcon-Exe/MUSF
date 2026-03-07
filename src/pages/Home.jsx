@@ -1,12 +1,45 @@
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaUsers, FaBook, FaHandsHelping, FaMicrophone, FaUserGraduate, FaSitemap, FaCalendarCheck, FaMedal, FaInstagram } from 'react-icons/fa';
-import { leaders } from '../data/leaders';
+import { FaUsers, FaBook, FaHandsHelping, FaMicrophone, FaUserGraduate, FaSitemap, FaCalendarCheck, FaMedal, FaInstagram, FaCheckCircle } from 'react-icons/fa';
+import { leadershipData } from '../data/leaders';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import StatCounter from '../components/StatCounter';
 import '../styles/Home.css';
 
 const Home = () => {
   useScrollReveal();
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleContactSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const form = e.target;
+    const data = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setIsFormSubmitted(true);
+        form.reset();
+      } else {
+        alert("Oops! There was a problem submitting your form");
+      }
+    } catch (error) {
+      alert("Oops! There was a problem submitting your form");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const stats = [
     { id: 1, icon: <FaUserGraduate size={32} />, label: "Active Students", num: 150, suffix: "+" },
     { id: 2, icon: <FaSitemap size={32} />, label: "Sub Committees", num: 10, suffix: "+" },
@@ -129,9 +162,9 @@ const Home = () => {
       <section className="leadership section reveal-on-scroll">
         <div className="container">
           <h2 className="section-title">Leadership</h2>
-          <div className="leadership-grid">
-            {leaders.map(leader => (
-              <div key={leader.id} className="leader-card">
+          <div className="grid grid-4 leaders-grid">
+            {leadershipData.executive.slice(0, 6).map(leader => (
+              <div key={leader.id} className="leader-card flex-col">
                 <div
                   className={`leader-photo-wrapper ${!leader.image ? 'image-failed' : ''}`}
                   style={!leader.image ? getInitialStyle(leader.name) : {}}
@@ -139,7 +172,7 @@ const Home = () => {
                   {leader.image && (
                     <img
                       src={leader.image}
-                      alt=""
+                      alt={leader.name}
                       loading="lazy"
                       className="leader-photo"
                       onError={(e) => {
@@ -159,11 +192,11 @@ const Home = () => {
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </div >
+      </section >
 
       {/* 5. Activities Section */}
-      <section className="activities section reveal-on-scroll">
+      < section className="activities section reveal-on-scroll" >
         <div className="container">
           <h2 className="section-title">Activities</h2>
           <div className="activities-grid">
@@ -176,10 +209,10 @@ const Home = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section >
 
       {/* 6. Announcements Section */}
-      <section className="announcements section reveal-on-scroll">
+      < section className="announcements section reveal-on-scroll" >
         <div className="container">
           <h2 className="section-title">Latest Announcements</h2>
           <div className="announcement-container">
@@ -201,10 +234,10 @@ const Home = () => {
           </div>
           <Link to="/announcements" className="view-all-link">View all announcements &rarr;</Link>
         </div>
-      </section>
+      </section >
 
       {/* 7. Event Gallery */}
-      <section className="gallery section reveal-on-scroll">
+      < section className="gallery section reveal-on-scroll" >
         <div className="container">
           <h2 className="section-title">Event Gallery</h2>
           <div className="gallery-grid">
@@ -240,19 +273,19 @@ const Home = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section >
 
       {/* 9. Call to Action */}
-      <section className="cta section reveal-on-scroll">
+      < section className="cta section reveal-on-scroll" >
         <div className="container cta-container">
           <h2>Join the Journey of Knowledge and Leadership</h2>
           <p>Become part of MUSF initiatives.</p>
           <Link to="/contact" className="btn btn-primary cta-btn">Contact Us</Link>
         </div>
-      </section>
+      </section >
 
       {/* 10. Contact Section */}
-      <section className="contact section reveal-on-scroll">
+      < section className="contact section reveal-on-scroll" >
         <div className="container">
           <h2 className="section-title">Contact</h2>
           <div className="contact-card-wrapper">
@@ -282,27 +315,38 @@ const Home = () => {
                 </div>
               </div>
               <div className="contact-form-wrapper">
-                <form action="https://formspree.io/f/placeholder" method="POST" className="premium-contact-form">
-                  <div className="form-group">
-                    <label htmlFor="name">Name</label>
-                    <input type="text" id="name" name="name" placeholder="Your Name" required />
+                {isFormSubmitted ? (
+                  <div className="success-message">
+                    <FaCheckCircle className="success-icon" />
+                    <h3>Message Sent!</h3>
+                    <p>Thank you for reaching out to us. We will get back to you shortly.</p>
+                    <button onClick={() => setIsFormSubmitted(false)} className="btn btn-outline new-message-btn">Send Another Message</button>
                   </div>
-                  <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Your Email Focus" required />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="message">Message</label>
-                    <textarea id="message" name="message" rows="4" placeholder="How can we help you?" required></textarea>
-                  </div>
-                  <button type="submit" className="btn btn-primary submit-btn">Send Message</button>
-                </form>
+                ) : (
+                  <form action="https://formspree.io/f/myknzkgd" method="POST" className="premium-contact-form" onSubmit={handleContactSubmit}>
+                    <div className="form-group">
+                      <label htmlFor="name">Name</label>
+                      <input type="text" id="name" name="name" placeholder="Your Name" required />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="email">Email</label>
+                      <input type="email" id="email" name="email" placeholder="Your Email Focus" required />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="message">Message</label>
+                      <textarea id="message" name="message" rows="4" placeholder="How can we help you?" required></textarea>
+                    </div>
+                    <button type="submit" className="btn btn-primary submit-btn" disabled={isSubmitting}>
+                      {isSubmitting ? 'Sending...' : 'Send Message'}
+                    </button>
+                  </form>
+                )}
               </div>
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </section >
+    </div >
   );
 };
 

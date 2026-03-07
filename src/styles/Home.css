@@ -145,8 +145,8 @@
 .scroll-indicator {
     position: absolute;
     bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    width: 100%;
     z-index: 3;
     display: flex;
     flex-direction: column;
@@ -170,6 +170,10 @@
     border: 2px solid var(--color-white);
     border-radius: 15px;
     position: relative;
+    margin: 0 auto;
+    /* Ensure it is centered */
+    display: flex;
+    justify-content: center;
 }
 
 .wheel {
@@ -177,21 +181,18 @@
     height: 8px;
     background: var(--color-white);
     border-radius: 2px;
-    position: absolute;
-    top: 6px;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-top: 6px;
     animation: scroll 1.5s infinite;
 }
 
 @keyframes scroll {
     0% {
-        top: 6px;
+        transform: translateY(0);
         opacity: 1;
     }
 
     100% {
-        top: 18px;
+        transform: translateY(12px);
         opacity: 0;
     }
 }

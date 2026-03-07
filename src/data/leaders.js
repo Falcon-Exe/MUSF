@@ -1,8 +1,8 @@
 export const leadershipData = {
     executive: [
-        { id: "e1", name: "Razin", role: "Chairman", image: "" },
+        { id: "e1", name: "Razin", role: "Chairman", image: "/leaders/razin.jpeg" },
         { id: "e2", name: "Salman", role: "Vice Chairman", image: "" },
-        { id: "e3", name: "Dilshad", role: "General Secretary", image: "" },
+        { id: "e3", name: "Dilshad", role: "General Secretary", image: "/leaders/dilshad.JPG" },
         { id: "e4", name: "Jirshad", role: "Joint Secretary", image: "" },
         { id: "e5", name: "Anees Rahman", role: "CUC", image: "" },
         { id: "e6", name: "Shiyas", role: "Treasurer", image: "" }

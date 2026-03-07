@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaUsers, FaBook, FaHandsHelping, FaMicrophone, FaUserGraduate, FaSitemap, FaCalendarCheck, FaMedal, FaInstagram, FaCheckCircle } from 'react-icons/fa';
+import { FaUsers, FaBook, FaHandsHelping, FaMicrophone, FaUserGraduate, FaSitemap, FaCalendarCheck, FaMedal, FaInstagram, FaCheckCircle, FaChevronDown } from 'react-icons/fa';
 import { leadershipData } from '../data/leaders';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import StatCounter from '../components/StatCounter';

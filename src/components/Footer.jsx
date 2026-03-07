@@ -10,7 +10,7 @@ const Footer = () => {
                 <div className="footer-col">
                     <img src="/logo.png" alt="MUSF Logo" className="footer-logo" />
                     <p className="footer-description">Majlis Umariyya Students Federation</p>
-                    <p className="footer-tagline">Serving Students with Knowledge, Unity, and Leadership.</p>
+                    <p className="footer-tagline">Majlis Umariyya Wafy College.</p>
                 </div>
                 <div className="footer-col">
                     <h4>Quick Links</h4>
@@ -25,7 +25,7 @@ const Footer = () => {
                     <h4>Social Media</h4>
                     <div className="social-links">
                         <a href="https://instagram.com/musf_puramannur" target="_blank" rel="noopener noreferrer"><FaInstagram size={24} /></a>
-                        <a href="https://facebook.com/musf_puramannur" target="_blank" rel="noopener noreferrer"><FaFacebook size={24} /></a>
+                        <a href="https://www.facebook.com/musf.puramannur" target="_blank" rel="noopener noreferrer"><FaFacebook size={24} /></a>
                         <a href="https://youtube.com/MajlisMedia" target="_blank" rel="noopener noreferrer"><FaYoutube size={24} /></a>
                     </div>
                 </div>

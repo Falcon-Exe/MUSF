@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FaUsers, FaBook, FaHandsHelping, FaMicrophone, FaUserGraduate, FaSitemap, FaCalendarCheck, FaMedal } from 'react-icons/fa';
+import { FaUsers, FaBook, FaHandsHelping, FaMicrophone, FaUserGraduate, FaSitemap, FaCalendarCheck, FaMedal, FaInstagram } from 'react-icons/fa';
 import { leaders } from '../data/leaders';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import StatCounter from '../components/StatCounter';
@@ -14,12 +14,42 @@ const Home = () => {
     { id: 4, icon: <FaMedal size={32} />, label: "Language Clubs", num: 3, suffix: "+" }
   ];
 
+  const instagramURL = "https://www.instagram.com/musf_puramannur";
+
   const activities = [
-    { title: "Academic Programs", icon: <FaBook size={24} />, desc: "Workshops, seminars, and study circles." },
-    { title: "Arts & Cultural Festivals", icon: <FaMicrophone size={24} />, desc: "Annual cultural and artistic competitions." },
-    { title: "Social Initiatives", icon: <FaHandsHelping size={24} />, desc: "Community outreach and volunteer programs." },
-    { title: "Community Development", icon: <FaUsers size={24} />, desc: "Training for future community leaders." }
+    { title: "Academic Programs", icon: <FaBook size={40} />, desc: "Workshops, seminars, and study circles." },
+    { title: "Arts & Cultural Festivals", icon: <FaMicrophone size={40} />, desc: "Annual cultural and artistic competitions." },
+    { title: "Social Initiatives", icon: <FaHandsHelping size={40} />, desc: "Community outreach and volunteer programs." },
+    { title: "Community Development", icon: <FaUsers size={40} />, desc: "Training for future community leaders." }
   ];
+
+  const announcementData = [
+    { id: 1, day: "20", month: "MAR", title: "Arts Festival 2024", category: "Event" },
+    { id: 2, day: "02", month: "APR", title: "General Body Meeting", category: "Meeting" },
+    { id: 3, day: "10", month: "APR", title: "Volunteer Training Program", category: "Program" }
+  ];
+
+  const galleryData = [
+    { id: 1, url: '/instagram/post1.jpg', alt: 'BUDGET BLUEPRINT' },
+    { id: 2, url: '/instagram/post2.png', alt: 'cricket1' },
+    { id: 3, url: '/instagram/post3.jpg', alt: 'ETHICS IN ECONOMICS' },
+    { id: 4, url: '/instagram/post4.jpg', alt: 'ramadan mubark' },
+    { id: 5, url: '/instagram/post5.jpg', alt: 'seminar cngrts' },
+    { id: 6, url: '/instagram/post6.jpg', alt: 'Untitled-33' }
+  ];
+
+  const getInitialStyle = (name) => {
+    const gradients = [
+      'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)', // Indigo-Purple
+      'linear-gradient(135deg, #3b82f6 0%, #2dd4bf 100%)', // Blue-Teal
+      'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)', // Amber-Red
+      'linear-gradient(135deg, #10b981 0%, #3b82f6 100%)', // Emerald-Blue
+      'linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%)'  // Pink-Violet
+    ];
+    // Simple hash to consistently pick a gradient based on name
+    const index = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % gradients.length;
+    return { background: gradients[index] };
+  };
 
   return (
     <div className="home">
@@ -73,7 +103,7 @@ const Home = () => {
             <img src="/college.png" alt="MUSF Students" className="about-img" />
           </div>
           <div className="about-content">
-            <h2>About MUSF</h2>
+            <h2>About Us</h2>
             <div className="about-card">
               <h3>Vision</h3>
               <p>Strengthen the upcoming generation with ideal youth and empower the muslim society.</p>
@@ -102,17 +132,22 @@ const Home = () => {
           <div className="leadership-grid">
             {leaders.map(leader => (
               <div key={leader.id} className="leader-card">
-                <div className="leader-photo-wrapper">
-                  <img
-                    src={leader.image}
-                    alt=""
-                    loading="lazy"
-                    className="leader-photo"
-                    onError={(e) => {
-                      e.target.classList.add('hide-image');
-                      e.target.parentElement.classList.add('image-failed');
-                    }}
-                  />
+                <div
+                  className={`leader-photo-wrapper ${!leader.image ? 'image-failed' : ''}`}
+                  style={!leader.image ? getInitialStyle(leader.name) : {}}
+                >
+                  {leader.image && (
+                    <img
+                      src={leader.image}
+                      alt=""
+                      loading="lazy"
+                      className="leader-photo"
+                      onError={(e) => {
+                        e.target.classList.add('hide-image');
+                        e.target.parentElement.classList.add('image-failed');
+                      }}
+                    />
+                  )}
                   <div className="leader-initials">
                     {leader.name.charAt(0)}
                   </div>
@@ -147,11 +182,23 @@ const Home = () => {
       <section className="announcements section reveal-on-scroll">
         <div className="container">
           <h2 className="section-title">Latest Announcements</h2>
-          <ul className="announcement-list">
-            <li><span className="bullet">•</span> Arts Festival – March 20</li>
-            <li><span className="bullet">•</span> General Body Meeting – April 2</li>
-            <li><span className="bullet">•</span> Volunteer Program – April 10</li>
-          </ul>
+          <div className="announcement-container">
+            {announcementData.map((item, idx) => (
+              <Link to="/announcements" key={item.id} className="announcement-card-link">
+                <div className="announcement-card-item">
+                  <div className="announcement-date">
+                    <span className="day">{item.day}</span>
+                    <span className="month">{item.month}</span>
+                  </div>
+                  <div className="announcement-content-info">
+                    <span className="announcement-category">{item.category}</span>
+                    <h3>{item.title}</h3>
+                  </div>
+                  <div className="announcement-arrow">&rarr;</div>
+                </div>
+              </Link>
+            ))}
+          </div>
           <Link to="/announcements" className="view-all-link">View all announcements &rarr;</Link>
         </div>
       </section>
@@ -161,10 +208,35 @@ const Home = () => {
         <div className="container">
           <h2 className="section-title">Event Gallery</h2>
           <div className="gallery-grid">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map(item => (
-              <div key={item} className="gallery-item">
-                <div className="gallery-img-placeholder">Gallery Image {item}</div>
-              </div>
+            {galleryData.map((item, idx) => (
+              <a
+                href={instagramURL}
+                target="_blank"
+                rel="noopener noreferrer"
+                key={item.id}
+                className="gallery-item-card"
+              >
+                <div className="gallery-img-container">
+                  <img
+                    src={item.url}
+                    alt={item.alt}
+                    loading="lazy"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.parentElement.classList.add('image-missing');
+                    }}
+                  />
+                  <div className="gallery-placeholder-text">
+                    Post {item.id}
+                  </div>
+                </div>
+                <div className="gallery-overlay">
+                  <div className="insta-overlay-content">
+                    <FaInstagram size={30} />
+                    <span>@musf_puramannur</span>
+                  </div>
+                </div>
+              </a>
             ))}
           </div>
         </div>
@@ -183,33 +255,49 @@ const Home = () => {
       <section className="contact section reveal-on-scroll">
         <div className="container">
           <h2 className="section-title">Contact</h2>
-          <div className="contact-grid">
-            <div className="contact-info">
-              <h3>Majlis Umariyya Wafy College</h3>
-              <p><strong>Email:</strong> musfpuramannur@gmail.com</p>
-              <p><strong>Phone:</strong> +91 8943539446</p>
-              <div className="map-placeholder">
-                <a href="https://maps.app.goo.gl/Y2X7468AdqpwSnvK9" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ marginTop: '1rem' }}>
-                  Open in Google Maps
-                </a>
+          <div className="contact-card-wrapper">
+            <div className="contact-grid">
+              <div className="contact-info">
+                <h3 className="contact-college-name">Majlis Umariyya Wafy College</h3>
+                <div className="contact-detail-item">
+                  <strong>Email:</strong>
+                  <a href="mailto:musfpuramannur@gmail.com">musfpuramannur@gmail.com</a>
+                </div>
+                <div className="contact-detail-item">
+                  <strong>Phone:</strong>
+                  <a href="tel:+918943539446">+91 8943539446</a>
+                </div>
+                <div className="map-container">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.6346083161393!2d76.1187168!3d10.9009311!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7c9a5252805eb%3A0x39e8805924f326c0!2sMajlis%20Wafy%20College!5e0!3m2!1sen!2sin!4v1741369784364!5m2!1sen!2sin"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Majlis Wafy College Location"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; geolocation"
+                  ></iframe>
+                </div>
               </div>
-            </div>
-            <div className="contact-form">
-              <form action="https://formspree.io/f/placeholder" method="POST">
-                <div className="form-group">
-                  <label htmlFor="name">Name</label>
-                  <input type="text" id="name" name="name" required />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <input type="email" id="email" name="email" required />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="message">Message</label>
-                  <textarea id="message" name="message" rows="5" required></textarea>
-                </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
-              </form>
+              <div className="contact-form-wrapper">
+                <form action="https://formspree.io/f/placeholder" method="POST" className="premium-contact-form">
+                  <div className="form-group">
+                    <label htmlFor="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your Name" required />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Your Email Focus" required />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="message">Message</label>
+                    <textarea id="message" name="message" rows="4" placeholder="How can we help you?" required></textarea>
+                  </div>
+                  <button type="submit" className="btn btn-primary submit-btn">Send Message</button>
+                </form>
+              </div>
             </div>
           </div>
         </div>

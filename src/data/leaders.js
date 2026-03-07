@@ -2,46 +2,38 @@ export const leaders = [
     {
         id: 1,
         name: "Razin",
-        role: "President",
+        role: "Chairman",
         image: "/leaders/razin.jpeg"
     },
     {
         id: 2,
         name: "Dilshad",
-        role: "Vice President",
+        role: "Secretary",
         image: "/leaders/dilshad.JPG"
     },
     {
         id: 3,
         name: "Jirshad",
-        role: "General Secretary",
-        image: "/leaders/jirshad.ARW"
+        role: "Joint Secretary",
+        image: "" // Note: Requires conversion to .jpg/.png to display
     },
     {
         id: 4,
         name: "Salman",
         role: "Vice Chairman",
-        image: "/leaders/placeholder.jpg"
+        image: "" // Triggers initials fallback
     },
     {
         id: 5,
         name: "Shiyas",
         role: "Treasurer",
-        image: "/leaders/placeholder.jpg"
+        image: "" // Triggers initials fallback
+    },
+    {
+        id: 6,
+        name: "Anees",
+        role: "CUC",
+        image: "" // Triggers initials fallback
     }
 ];
 
-// export const pastLeaders = [
-//     {
-//         id: 1,
-//         year: "2024",
-//         name: "Ahmed K",
-//         role: "President"
-//     },
-//     {
-//         id: 2,
-//         year: "2023",
-//         name: "Rashid P",
-//         role: "President"
-//     }
-// ];

@@ -3,19 +3,19 @@ export const leaders = [
         id: 1,
         name: "Razin",
         role: "President",
-        image: "/leaders/placeholder.jpg"
+        image: "/leaders/razin.jpeg"
     },
     {
         id: 2,
         name: "Dilshad",
         role: "Vice President",
-        image: "/leaders/placeholder.jpg"
+        image: "/leaders/dilshad.JPG"
     },
     {
         id: 3,
         name: "Jirshad",
         role: "General Secretary",
-        image: "/leaders/placeholder.jpg"
+        image: "/leaders/jirshad.ARW"
     },
     {
         id: 4,

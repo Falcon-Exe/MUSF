@@ -103,7 +103,19 @@ const Home = () => {
             {leaders.map(leader => (
               <div key={leader.id} className="leader-card">
                 <div className="leader-photo-wrapper">
-                  <img src={leader.image} alt={leader.name} loading="lazy" className="leader-photo" />
+                  <img
+                    src={leader.image}
+                    alt=""
+                    loading="lazy"
+                    className="leader-photo"
+                    onError={(e) => {
+                      e.target.classList.add('hide-image');
+                      e.target.parentElement.classList.add('image-failed');
+                    }}
+                  />
+                  <div className="leader-initials">
+                    {leader.name.charAt(0)}
+                  </div>
                 </div>
                 <div className="leader-info">
                   <h3>{leader.name}</h3>

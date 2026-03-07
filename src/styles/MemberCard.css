@@ -1,0 +1,65 @@
+.member-card {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    text-align: center;
+    border: 1px solid var(--color-lightgray);
+}
+
+.member-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-gold);
+}
+
+.member-photo {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: var(--color-offwhite);
+    overflow: hidden;
+}
+
+.member-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-normal);
+}
+
+.member-card:hover .member-photo img {
+    transform: scale(1.05);
+}
+
+.photo-placeholder {
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748b' opacity='0.2'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E");
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.member-info {
+    padding: 1.5rem;
+}
+
+.member-name {
+    font-size: 1.25rem;
+    color: var(--color-green);
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+}
+
+.member-role {
+    color: var(--color-gold);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.member-department {
+    color: var(--color-gray);
+    font-size: 0.9rem;
+}

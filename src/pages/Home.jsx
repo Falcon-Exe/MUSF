@@ -2,15 +2,16 @@ import { Link } from 'react-router-dom';
 import { FaUsers, FaBook, FaHandsHelping, FaMicrophone, FaUserGraduate, FaSitemap, FaCalendarCheck, FaMedal } from 'react-icons/fa';
 import { leaders } from '../data/leaders';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import StatCounter from '../components/StatCounter';
 import '../styles/Home.css';
 
 const Home = () => {
   useScrollReveal();
   const stats = [
-    { id: 1, icon: <FaUserGraduate size={32} />, label: "Active Students", count: "120+" },
-    { id: 2, icon: <FaSitemap size={32} />, label: "Sub Committees", count: "10+" },
-    { id: 3, icon: <FaCalendarCheck size={32} />, label: "Intellectual Conclaves", count: "4+" },
-    { id: 4, icon: <FaMedal size={32} />, label: "Language Clubs", count: "3+" }
+    { id: 1, icon: <FaUserGraduate size={32} />, label: "Active Students", num: 150, suffix: "+" },
+    { id: 2, icon: <FaSitemap size={32} />, label: "Sub Committees", num: 10, suffix: "+" },
+    { id: 3, icon: <FaCalendarCheck size={32} />, label: "Intellectual Conclaves", num: 4, suffix: "+" },
+    { id: 4, icon: <FaMedal size={32} />, label: "Language Clubs", num: 3, suffix: "+" }
   ];
 
   const activities = [
@@ -48,14 +49,20 @@ const Home = () => {
 
       {/* 2. Statistics Section */}
       <section className="stats section reveal-on-scroll">
-        <div className="container stats-grid">
-          {stats.map(stat => (
-            <div key={stat.id} className="stat-card">
-              <div className="stat-icon">{stat.icon}</div>
-              <h3 className="stat-count">{stat.count}</h3>
-              <p className="stat-label">{stat.label}</p>
-            </div>
-          ))}
+        <div className="stats-pattern"></div>
+        <div className="container">
+          <h2 className="section-title">Our Impact</h2>
+          <div className="stats-grid">
+            {stats.map(stat => (
+              <div key={stat.id} className="stat-card">
+                <div className="stat-icon-wrapper">{stat.icon}</div>
+                <h3 className="stat-count">
+                  <StatCounter endValue={stat.num} suffix={stat.suffix} />
+                </h3>
+                <p className="stat-label">{stat.label}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -167,10 +174,12 @@ const Home = () => {
           <div className="contact-grid">
             <div className="contact-info">
               <h3>Majlis Umariyya Wafy College</h3>
-              <p><strong>Email:</strong> musfpuramannur@college.edu</p>
+              <p><strong>Email:</strong> musfpuramannur@gmail.com</p>
               <p><strong>Phone:</strong> +91 8943539446</p>
               <div className="map-placeholder">
-                Google Map Location Embed
+                <a href="https://maps.app.goo.gl/Y2X7468AdqpwSnvK9" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ marginTop: '1rem' }}>
+                  Open in Google Maps
+                </a>
               </div>
             </div>
             <div className="contact-form">

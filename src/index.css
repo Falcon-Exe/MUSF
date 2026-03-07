@@ -15,8 +15,8 @@
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  color: var(--text-dark);
-  background-color: var(--bg-light);
+  color: var(--color-dark);
+  background-color: var(--color-offwhite);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
@@ -29,7 +29,7 @@ h5,
 h6 {
   font-family: 'Outfit', sans-serif;
   margin-top: 0;
-  color: var(--primary);
+  color: var(--color-green);
 }
 
 a {
@@ -61,8 +61,8 @@ button,
 }
 
 .btn-primary {
-  background-color: var(--primary);
-  color: var(--white);
+  background-color: var(--color-green);
+  color: var(--color-white);
 }
 
 .btn-primary:hover {

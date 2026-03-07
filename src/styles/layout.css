@@ -86,13 +86,13 @@
 }
 
 .btn-primary {
-    background-color: var(--color-gold);
-    color: var(--color-dark);
+    background-color: var(--color-green);
+    color: var(--color-white);
 }
 
 .btn-primary:hover {
-    background-color: #f59e0b;
-    /* slightly darker gold */
+    background-color: #04382a;
+    /* slightly darker green */
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
 }

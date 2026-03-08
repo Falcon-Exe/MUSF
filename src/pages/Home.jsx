@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaUsers, FaBook, FaHandsHelping, FaMicrophone, FaUserGraduate, FaSitemap, FaCalendarCheck, FaMedal, FaInstagram, FaCheckCircle, FaChevronDown } from 'react-icons/fa';
 import { leadershipData } from '../data/leaders';
+import { announcementData } from '../data/announcements';
+import { contactData } from '../data/contact';
+import { activityData } from '../data/activities';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import StatCounter from '../components/StatCounter';
 import '../styles/Home.css';
@@ -49,27 +52,51 @@ const Home = () => {
 
   const instagramURL = "https://www.instagram.com/musf_puramannur";
 
-  const activities = [
-    { title: "Academic Programs", icon: <FaBook size={40} />, desc: "Workshops, seminars, and study circles." },
-    { title: "Arts & Cultural Festivals", icon: <FaMicrophone size={40} />, desc: "Annual cultural and artistic competitions." },
-    { title: "Social Initiatives", icon: <FaHandsHelping size={40} />, desc: "Community outreach and volunteer programs." },
-    { title: "Community Development", icon: <FaUsers size={40} />, desc: "Training for future community leaders." }
-  ];
+  const activities = activityData.slice(0, 4);
 
-  const announcementData = [
-    { id: 1, day: "20", month: "MAR", title: "Arts Festival 2024", category: "Event" },
-    { id: 2, day: "02", month: "APR", title: "General Body Meeting", category: "Meeting" },
-    { id: 3, day: "10", month: "APR", title: "Volunteer Training Program", category: "Program" }
-  ];
 
-  const galleryData = [
-    { id: 1, url: '/instagram/post1.jpg', alt: 'BUDGET BLUEPRINT' },
-    { id: 2, url: '/instagram/post2.png', alt: 'cricket1' },
-    { id: 3, url: '/instagram/post3.jpg', alt: 'ETHICS IN ECONOMICS' },
-    { id: 4, url: '/instagram/post4.jpg', alt: 'ramadan mubark' },
-    { id: 5, url: '/instagram/post5.jpg', alt: 'seminar cngrts' },
-    { id: 6, url: '/instagram/post6.jpg', alt: 'Untitled-33' }
-  ];
+
+  const [instagramPosts, setInstagramPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Try fetching real instagram posts
+  useEffect(() => {
+    const fetchInstagramPosts = async () => {
+      const token = import.meta.env.VITE_INSTAGRAM_TOKEN;
+
+      if (!token) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,thumbnail_url&access_token=${token}`
+        );
+        const data = await response.json();
+
+        if (data.data) {
+          const formattedPosts = data.data.slice(0, 6).map((post, i) => ({
+            id: post.id,
+            url: post.media_type === 'VIDEO' ? post.thumbnail_url : post.media_url,
+            alt: post.caption ? post.caption.substring(0, 40) : `Instagram post ${i + 1}`,
+            link: post.permalink
+          }));
+          setInstagramPosts(formattedPosts);
+        } else {
+          setError('Failed to load real posts.');
+        }
+      } catch (err) {
+        console.error("Error fetching Instagram posts:", err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchInstagramPosts();
+  }, []);
 
   const getInitialStyle = (name) => {
     const gradients = [
@@ -224,7 +251,7 @@ const Home = () => {
                     <span className="month">{item.month}</span>
                   </div>
                   <div className="announcement-content-info">
-                    <span className="announcement-category">{item.category}</span>
+                    <span className="announcement-category">{item.type}</span>
                     <h3>{item.title}</h3>
                   </div>
                   <div className="announcement-arrow">&rarr;</div>
@@ -240,14 +267,14 @@ const Home = () => {
       < section className="gallery section reveal-on-scroll" >
         <div className="container">
           <h2 className="section-title">Event Gallery</h2>
-          <div className="gallery-grid">
-            {galleryData.map((item, idx) => (
+          <div className="home-gallery-grid">
+            {instagramPosts.map((item, idx) => (
               <a
-                href={instagramURL}
+                href={item.link || instagramURL}
                 target="_blank"
                 rel="noopener noreferrer"
                 key={item.id}
-                className="gallery-item-card"
+                className="home-gallery-item-card"
               >
                 <div className="gallery-img-container">
                   <img
@@ -260,7 +287,7 @@ const Home = () => {
                     }}
                   />
                   <div className="gallery-placeholder-text">
-                    Post {item.id}
+                    Post {idx + 1}
                   </div>
                 </div>
                 <div className="gallery-overlay">
@@ -294,15 +321,15 @@ const Home = () => {
                 <h3 className="contact-college-name">Majlis Umariyya Wafy College</h3>
                 <div className="contact-detail-item">
                   <strong>Email:</strong>
-                  <a href="mailto:musfpuramannur@gmail.com">musfpuramannur@gmail.com</a>
+                  <a href={contactData.email.addresses[0].link}>{contactData.email.addresses[0].value}</a>
                 </div>
                 <div className="contact-detail-item">
                   <strong>Phone:</strong>
-                  <a href="tel:+918943539446">+91 8943539446</a>
+                  <a href={contactData.phone.numbers[2].link}>{contactData.phone.numbers[2].value}</a>
                 </div>
                 <div className="map-container">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.6346083161393!2d76.1187168!3d10.9009311!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7c9a5252805eb%3A0x39e8805924f326c0!2sMajlis%20Wafy%20College!5e0!3m2!1sen!2sin!4v1741369784364!5m2!1sen!2sin"
+                    src={contactData.address.mapUrl}
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
@@ -323,7 +350,7 @@ const Home = () => {
                     <button onClick={() => setIsFormSubmitted(false)} className="btn btn-outline new-message-btn">Send Another Message</button>
                   </div>
                 ) : (
-                  <form action="https://formspree.io/f/myknzkgd" method="POST" className="premium-contact-form" onSubmit={handleContactSubmit}>
+                  <form action={contactData.formEndpoint} method="POST" className="premium-contact-form" onSubmit={handleContactSubmit}>
                     <div className="form-group">
                       <label htmlFor="name">Name</label>
                       <input type="text" id="name" name="name" placeholder="Your Name" required />

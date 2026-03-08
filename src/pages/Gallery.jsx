@@ -1,17 +1,70 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { FaInstagram } from 'react-icons/fa';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 import '../styles/Pages.css';
 import '../styles/ContactGallery.css';
+import '../styles/Home.css';
 
 const Gallery = () => {
-  // Using high-quality unsplash placeholders for realistic preview
-  const images = [
-    { id: 1, url: 'https://images.unsplash.com/photo-1523580458119-389f4eb1ecb4?auto=format&fit=crop&q=80&w=800', alt: 'Students gathering' },
-    { id: 2, url: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=800', alt: 'Library' },
-    { id: 3, url: 'https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=800', alt: 'Seminar' },
-    { id: 4, url: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=800', alt: 'Arts festival' },
-    { id: 5, url: 'https://images.unsplash.com/photo-1560523159-4a9692d222f9?auto=format&fit=crop&q=80&w=800', alt: 'Medical facility' },
-    { id: 6, url: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80&w=800', alt: 'Discussion' },
+  useScrollReveal();
+  const [instagramPosts, setInstagramPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fallback data
+  const galleryData = [
+    { id: 1, url: '/instagram/post1.jpg', alt: 'BUDGET BLUEPRINT' },
+    { id: 2, url: '/instagram/post2.png', alt: 'cricket1' },
+    { id: 3, url: '/instagram/post3.jpg', alt: 'ETHICS IN ECONOMICS' },
+    { id: 4, url: '/instagram/post4.jpg', alt: 'ramadan mubark' },
+    { id: 5, url: '/instagram/post5.jpg', alt: 'seminar cngrts' },
+    { id: 6, url: '/instagram/post6.jpg', alt: 'Untitled-33' }
   ];
+
+  const instagramURL = "https://www.instagram.com/musf_puramannur";
+
+  // Try fetching real instagram posts
+  useEffect(() => {
+    const fetchInstagramPosts = async () => {
+      // You must provide this in your .env file: VITE_INSTAGRAM_TOKEN=...
+      const token = import.meta.env.VITE_INSTAGRAM_TOKEN;
+
+      if (!token) {
+        setLoading(false);
+        return; // No token, fallback to mock data
+      }
+
+      try {
+        const response = await fetch(
+          `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,thumbnail_url&access_token=${token}`
+        );
+        const data = await response.json();
+
+        if (data.data) {
+          // Format raw API response to match our component structure
+          const formattedPosts = data.data.slice(0, 18).map((post, i) => ({
+            id: post.id,
+            // Use thumbnail for video, media_url for image
+            url: post.media_type === 'VIDEO' ? post.thumbnail_url : post.media_url,
+            alt: post.caption ? post.caption.substring(0, 40) : `Instagram post ${i + 1}`,
+            link: post.permalink
+          }));
+          setInstagramPosts(formattedPosts);
+        } else {
+          setError('Failed to load real posts.');
+        }
+      } catch (err) {
+        console.error("Error fetching Instagram posts:", err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchInstagramPosts();
+  }, []);
+
+  const postsToDisplay = instagramPosts.length > 0 ? instagramPosts : galleryData;
 
   return (
     <div className="gallery-page section-bg-offwhite min-h-screen">
@@ -22,15 +75,42 @@ const Gallery = () => {
         </div>
       </header>
 
-      <div className="container section">
-        <div className="gallery-grid">
-          {images.map(img => (
-            <div key={img.id} className="gallery-item">
-              <img src={img.url} alt={img.alt} loading="lazy" />
-            </div>
-          ))}
+      <section className="gallery section reveal-on-scroll">
+        <div className="container">
+          <div className="gallery-grid">
+            {postsToDisplay.map((item, idx) => (
+              <a
+                href={item.link || instagramURL}
+                target="_blank"
+                rel="noopener noreferrer"
+                key={item.id}
+                className="gallery-item-card"
+              >
+                <div className="gallery-img-container">
+                  <img
+                    src={item.url}
+                    alt={item.alt}
+                    loading="lazy"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.parentElement.classList.add('image-missing');
+                    }}
+                  />
+                  <div className="gallery-placeholder-text">
+                    Post {idx + 1}
+                  </div>
+                </div>
+                <div className="gallery-overlay">
+                  <div className="insta-overlay-content">
+                    <FaInstagram size={30} />
+                    <span>@musf_puramannur</span>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };

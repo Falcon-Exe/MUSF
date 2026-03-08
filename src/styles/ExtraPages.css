@@ -10,10 +10,18 @@
     text-align: center;
     transition: transform var(--transition-normal), box-shadow var(--transition-normal);
     border: 1px solid var(--color-lightgray);
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+@media (max-width: 768px) {
+    .activity-card {
+        padding: 2rem 1.5rem;
+    }
 }
 
 .activity-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px) !important;
     box-shadow: var(--shadow-lg);
     border-color: var(--color-gold);
 }
@@ -27,6 +35,29 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--color-gold);
+}
+
+.activity-icon-wrapper svg {
+    font-size: 2.2rem;
+}
+
+.activity-title {
+    color: var(--color-green);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    transition: color var(--transition-normal);
+}
+
+.activity-desc {
+    color: var(--color-dark);
+    line-height: 1.6;
+    transition: color var(--transition-normal);
+}
+
+.activity-card:hover .activity-title,
+.activity-card:hover .activity-desc {
+    color: var(--color-white);
 }
 
 .text-gold {
@@ -73,11 +104,22 @@
     gap: 1.5rem;
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--color-lightgray);
-    transition: box-shadow var(--transition-normal);
+    transition: all var(--transition-normal);
+}
+
+@media (max-width: 768px) {
+    .announcement-card {
+        flex-direction: column;
+        padding: 1.5rem;
+        gap: 1rem;
+    }
 }
 
 .announcement-card:hover {
-    box-shadow: var(--shadow-md);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    background-color: var(--color-green);
+    border-color: var(--color-gold);
 }
 
 .announcement-icon {
@@ -97,9 +139,10 @@
     margin-bottom: 0.5rem;
 }
 
-.announcement-date {
+.announcement-page-date {
     color: var(--color-gray);
     font-size: 0.9rem;
+    transition: color var(--transition-normal);
 }
 
 .announcement-badge {
@@ -108,10 +151,29 @@
     padding: 0.2rem 0.8rem;
     border-radius: var(--radius-full);
     border: 1px solid;
+    transition: all var(--transition-normal);
 }
 
 .announcement-title {
     color: var(--color-green);
     font-size: 1.3rem;
     margin-bottom: 0.5rem;
+    transition: color var(--transition-normal);
+}
+
+.announcement-desc {
+    color: var(--color-dark);
+    line-height: 1.6;
+    transition: color var(--transition-normal);
+}
+
+.announcement-card:hover .announcement-title,
+.announcement-card:hover .announcement-desc,
+.announcement-card:hover .announcement-page-date {
+    color: var(--color-white);
+}
+
+.announcement-card:hover .announcement-badge {
+    color: var(--color-white) !important;
+    border-color: var(--color-white) !important;
 }

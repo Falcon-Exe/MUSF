@@ -1,14 +1,11 @@
 import React from 'react';
 import { FaBullhorn } from 'react-icons/fa';
+import { announcementData } from '../data/announcements';
 import '../styles/Pages.css';
 import '../styles/ExtraPages.css';
 
 const Announcements = () => {
-  const notices = [
-    { id: 1, date: 'Mar 15, 2026', title: 'Annual General Body Meeting', desc: 'All members are requested to attend the AGM at the main auditorium at 10 AM.', type: 'Important' },
-    { id: 2, date: 'Mar 10, 2026', title: 'Sargam Arts Fest Registration', desc: 'Registrations for the upcoming arts festival are now open. Contact the Arts Secretary.', type: 'Event' },
-    { id: 3, date: 'Feb 28, 2026', title: 'New Constitution Draft', desc: 'The updated constitution draft is available for review in the library notice board.', type: 'Notice' }
-  ];
+  const notices = announcementData;
 
   const getTypeColor = (type) => {
     switch (type) {
@@ -36,11 +33,11 @@ const Announcements = () => {
               </div>
               <div className="announcement-content">
                 <div className="announcement-meta">
-                  <span className="announcement-date">{notice.date}</span>
+                  <span className="announcement-page-date">{notice.date}</span>
                   <span className="announcement-badge" style={{ color: getTypeColor(notice.type), borderColor: getTypeColor(notice.type) }}>{notice.type}</span>
                 </div>
                 <h3 className="announcement-title">{notice.title}</h3>
-                <p className="announcement-desc" style={{ color: 'var(--color-dark)' }}>{notice.desc}</p>
+                <p className="announcement-desc">{notice.desc}</p>
               </div>
             </div>
           ))}

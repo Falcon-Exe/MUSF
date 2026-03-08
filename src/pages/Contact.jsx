@@ -1,9 +1,42 @@
-import React from 'react';
-import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaCheckCircle } from 'react-icons/fa';
+import { contactData } from '../data/contact';
 import '../styles/Pages.css';
 import '../styles/ContactGallery.css';
 
 const Contact = () => {
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleContactSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const form = e.target;
+    const data = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setIsFormSubmitted(true);
+        form.reset();
+      } else {
+        alert("Oops! There was a problem submitting your form");
+      }
+    } catch (error) {
+      alert("Oops! There was a problem submitting your form");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="contact-page section-bg-offwhite min-h-screen">
       <header className="page-header pattern-bg section-bg-green text-white">
@@ -20,24 +53,35 @@ const Contact = () => {
               <div className="contact-detail">
                 <div className="contact-icon"><FaMapMarkerAlt size={24} /></div>
                 <div className="contact-text">
-                  <h4>Address</h4>
-                  <p>Majlis Umariyya Wafy College<br />Puramannur, Malappuram<br />Kerala, PIN: 676511</p>
+                  <h4>{contactData.address.title}</h4>
+                  <p style={{ whiteSpace: 'pre-line' }}>{contactData.address.details}</p>
                 </div>
               </div>
               <div className="contact-detail">
                 <div className="contact-icon"><FaPhoneAlt size={24} /></div>
                 <div className="contact-text">
-                  <h4>Phone</h4>
-                  <p>+91 82899 49746<br />+91 75599 76086</p>
+                  <h4>{contactData.phone.title}</h4>
+                  <p>
+                    {contactData.phone.numbers.map((num, idx) => (
+                      <React.Fragment key={idx}>
+                        <a href={num.link}>{num.value}</a> ({num.label})
+                        {idx < contactData.phone.numbers.length - 1 && <br />}
+                      </React.Fragment>
+                    ))}
+                  </p>
                 </div>
               </div>
               <div className="contact-detail">
                 <div className="contact-icon"><FaEnvelope size={24} /></div>
                 <div className="contact-text">
-                  <h4>Email</h4>
+                  <h4>{contactData.email.title}</h4>
                   <p>
-                    <a href="mailto:musfpuramannur@gmail.com">musfpuramannur@gmail.com</a><br />
-                    <a href="mailto:musf.prd@gmail.com">musf.prd@gmail.com</a>
+                    {contactData.email.addresses.map((mail, idx) => (
+                      <React.Fragment key={idx}>
+                        <a href={mail.link}>{mail.value}</a>
+                        {idx < contactData.email.addresses.length - 1 && <br />}
+                      </React.Fragment>
+                    ))}
                   </p>
                 </div>
               </div>
@@ -45,9 +89,9 @@ const Contact = () => {
 
             <div className="map-container" style={{ marginTop: '2rem' }}>
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.423986960863!2d76.012356!3d10.852445!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7ba000ecfb49b%3A0x6e9a66d6d4a0b2d5!2sMajlis%20Wafy%20College%20Puramannur!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                src={contactData.address.mapUrl}
                 width="100%"
-                height="300"
+                height="350"
                 style={{ border: 0, borderRadius: 'var(--radius-lg)' }}
                 allowFullScreen=""
                 loading="lazy"
@@ -59,26 +103,35 @@ const Contact = () => {
 
           <div className="contact-form-container">
             <div className="contact-card">
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '1.5rem', color: 'var(--color-green)' }}>Send a Message</h3>
-              <form onSubmit={e => e.preventDefault()}>
-                <div className="form-group">
-                  <label htmlFor="name">Full Name</label>
-                  <input type="text" id="name" className="form-control" placeholder="Your name" />
+              {isFormSubmitted ? (
+                <div className="success-message">
+                  <FaCheckCircle className="success-icon" />
+                  <h3>Message Sent!</h3>
+                  <p>Thank you for reaching out to us. We will get back to you shortly.</p>
+                  <button onClick={() => setIsFormSubmitted(false)} className="new-message-btn">Send Another Message</button>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="email">Email Address</label>
-                  <input type="email" id="email" className="form-control" placeholder="Your email" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="subject">Subject</label>
-                  <input type="text" id="subject" className="form-control" placeholder="Subject of your message" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="message">Message</label>
-                  <textarea id="message" className="form-control" rows="5" placeholder="How can we help you?"></textarea>
-                </div>
-                <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>Send Message</button>
-              </form>
+              ) : (
+                <>
+                  <h3 style={{ fontSize: '1.5rem', marginBottom: '1.5rem', color: 'var(--color-green)' }}>Send a Message</h3>
+                  <form action={contactData.formEndpoint} method="POST" className="premium-contact-form" onSubmit={handleContactSubmit}>
+                    <div className="form-group">
+                      <label htmlFor="name">Full Name</label>
+                      <input type="text" id="name" name="name" className="form-control" placeholder="Your name" required />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="email">Email Address</label>
+                      <input type="email" id="email" name="email" className="form-control" placeholder="Your email" required />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="message">Message</label>
+                      <textarea id="message" name="message" className="form-control" rows="5" placeholder="How can we help you?" required></textarea>
+                    </div>
+                    <button type="submit" className="btn btn-primary submit-btn" style={{ width: '100%' }} disabled={isSubmitting}>
+                      {isSubmitting ? 'Sending...' : 'Send Message'}
+                    </button>
+                  </form>
+                </>
+              )}
             </div>
           </div>
         </div>

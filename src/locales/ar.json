@@ -1,0 +1,22 @@
+{
+    "translation": {
+        "nav": {
+            "home": "الرئيسية",
+            "about": "حول",
+            "leadership": "القيادة",
+            "activities": "الأنشطة",
+            "announcements": "الإعلانات",
+            "gallery": "المعرض",
+            "contact": "اتصل بنا",
+            "support": "ادعمنا"
+        },
+        "hero": {
+            "title_part1": "مجلس عمرية",
+            "title_part2": "اتحاد الطلاب",
+            "tagline": "\"خدمة الطلاب بالمعرفة والوحدة والقيادة\"",
+            "cta_explore": "استكشاف الأنشطة",
+            "cta_about": "حول المجلس",
+            "breaking_news": "آخر الأخبار"
+        }
+    }
+}

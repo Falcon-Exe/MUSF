@@ -1,0 +1,22 @@
+{
+    "translation": {
+        "nav": {
+            "home": "Home",
+            "about": "About",
+            "leadership": "Leadership",
+            "activities": "Activities",
+            "announcements": "Announcements",
+            "gallery": "Gallery",
+            "contact": "Contact",
+            "support": "Support Us"
+        },
+        "hero": {
+            "title_part1": "Majlis Umariyya",
+            "title_part2": "Students Federation",
+            "tagline": "\"Serving Students with Knowledge, Unity & Leadership\"",
+            "cta_explore": "Explore Activities",
+            "cta_about": "About MUSF",
+            "breaking_news": "Breaking News"
+        }
+    }
+}

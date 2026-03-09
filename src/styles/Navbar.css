@@ -15,9 +15,11 @@
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-.navbar.scrolled {
-    background-color: var(--color-white);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+/* Force green color for ALL interactive elements when scrolled or on mobile */
+.navbar.scrolled .nav-links,
+.navbar.scrolled .globe-icon,
+.navbar.scrolled .menu-icon {
+    color: var(--color-green) !important;
 }
 
 .nav-container {
@@ -35,12 +37,17 @@
     display: flex;
     align-items: center;
     flex-shrink: 0;
+    background: transparent !important;
 }
 
 .logo-img {
     height: 50px;
     width: auto;
     object-fit: contain;
+    mix-blend-mode: multiply;
+    /* Fixes white background on non-transparent logo */
+    padding: 2px;
+    background: transparent !important;
 }
 
 .nav-menu {
@@ -55,8 +62,7 @@
 }
 
 .nav-links {
-    color: var(--color-green);
-    /* Changed to green for contrast */
+    color: var(--color-white);
     font-weight: 500;
     font-size: 1.1rem;
     text-decoration: none;
@@ -66,42 +72,123 @@
 .nav-links:hover,
 .nav-links.active {
     color: var(--color-gold);
-    /* Gold highlight on white looks professional */
 }
 
 .menu-icon {
     display: none;
     cursor: pointer;
+    color: var(--color-white);
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.language-selector {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: var(--color-green);
+    padding: 0.5rem;
+}
+
+.globe-icon {
+    font-size: 1.4rem;
+    transition: color 0.3s ease;
+    color: var(--color-white);
+}
+
+.language-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--color-white);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 0.5rem;
+    display: none;
+    flex-direction: column;
+    min-width: 120px;
+    z-index: 1002;
+}
+
+.language-selector:hover .language-dropdown {
+    display: flex;
+}
+
+.language-dropdown button {
+    background: none;
+    border: none;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
     color: var(--color-dark);
+    transition: background 0.3s ease, color 0.3s ease;
+    border-radius: 4px;
+}
+
+.language-dropdown button:hover,
+.language-dropdown button.active {
+    background: var(--color-offwhite);
+    color: var(--color-green);
+    font-weight: 600;
+}
+
+.mobile-languages {
+    display: none;
+    padding: 1rem;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 @media screen and (max-width: 960px) {
+    .navbar {
+        background-color: transparent;
+        /* Transparent by default on mobile */
+    }
+
+    /* Green colors ONLY when scrolled or when navbar is solid */
+    .navbar.scrolled .nav-links,
+    .navbar.scrolled .globe-icon,
+    .navbar.scrolled .menu-icon {
+        color: var(--color-green) !important;
+    }
+
+    /* White colors at the top (transparent state) */
+    .navbar:not(.scrolled) .nav-links,
+    .navbar:not(.scrolled) .globe-icon,
+    .navbar:not(.scrolled) .menu-icon {
+        color: var(--color-white) !important;
+    }
+
     .nav-menu {
         display: flex;
         flex-direction: column;
         width: 70%;
-        /* Adjusted width for better mobile feel */
         height: 100vh;
         position: fixed;
-        /* Changed to fixed to cover full height */
         top: 0;
         left: 100%;
-        /* Starts hidden on the right */
         background-color: var(--color-white);
-        /* Changed Green to White */
         padding: 5rem 0;
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
         z-index: 1000;
         transition: all 0.5s ease;
     }
 
-
-    /* When menu is open */
     .nav-menu.active {
         left: 30%;
-        /* Slides in from the right, leaving 30% gap on the left */
         background-color: var(--color-green);
-        /* Kept White */
+    }
+
+    .nav-menu.active .nav-links {
+        color: var(--color-white) !important;
     }
 
     .nav-item {
@@ -109,14 +196,36 @@
     }
 
     .nav-links {
-        color: var(--color-white);
-        /* Links remain green on the white background */
         font-size: 1.5rem;
     }
 
     .menu-icon {
         display: block;
         z-index: 1001;
-        /* Ensure icon stays above the white menu */
+    }
+
+    .mobile-languages {
+        display: flex;
+        margin-top: 2rem;
+    }
+
+    .mobile-languages button {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: var(--color-white);
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+    }
+
+    .mobile-languages button.active {
+        background: var(--color-gold);
+        color: var(--color-green);
+        border-color: var(--color-gold);
+    }
+
+    .language-selector {
+        display: none;
     }
 }

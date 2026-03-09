@@ -1,5 +1,8 @@
 .page-header {
-    padding: 6rem 0 3rem 0;
+    margin-top: -60px;
+    /* Pull under the transparent navbar */
+    padding: 10rem 0 4rem 0;
+    /* Increased top padding */
     text-align: center;
     margin-bottom: 2rem;
     border-bottom: 4px solid var(--color-gold);
@@ -7,7 +10,9 @@
 
 @media (max-width: 768px) {
     .page-header {
-        padding: 5rem 0 2rem 0;
+        margin-top: -60px;
+        padding: 6rem 0 3rem 0;
+        /* Reduced mobile padding */
     }
 }
 
@@ -152,5 +157,47 @@
     .vision-mission-grid {
         gap: 1.5rem;
         margin-top: 2rem;
+    }
+}
+
+/* --- Leadership Page Specifics --- */
+.leadership-category-section {
+    margin-bottom: 4rem;
+}
+
+@media (max-width: 768px) {
+    .leadership-category-section {
+        margin-bottom: 2.5rem;
+    }
+}
+
+.leadership-section-grid {
+    margin-top: 3rem;
+}
+
+@media (max-width: 768px) {
+    .leadership-section-grid {
+        margin-top: 1rem;
+        /* Force 2 columns on mobile to reduce scrolling */
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.75rem !important;
+        /* Slightly tighter gap */
+    }
+
+    .leadership-category-section .section-title {
+        font-size: 1.4rem !important;
+        /* Scaled down from 2.2rem+ */
+        margin-bottom: 0.5rem;
+    }
+
+    .leadership-category-section .section-subtitle {
+        font-size: 0.85rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+}
+
+@media (max-width: 350px) {
+    .leadership-section-grid {
+        grid-template-columns: 1fr !important;
     }
 }

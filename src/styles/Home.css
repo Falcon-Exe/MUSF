@@ -7,6 +7,99 @@
     color: var(--color-green);
 }
 
+/* --- News Ticker --- */
+.news-ticker-container {
+    display: flex;
+    background: var(--color-white);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    height: 40px;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+}
+
+.ticker-label {
+    background: var(--color-green);
+    color: var(--color-white);
+    padding: 0 1.5rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 2;
+    white-space: nowrap;
+}
+
+.ticker-label::after {
+    content: '';
+    position: absolute;
+    right: -15px;
+    top: 0;
+    border-left: 15px solid var(--color-green);
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+}
+
+.ticker-wrapper {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.ticker-content {
+    display: flex;
+    white-space: nowrap;
+    animation: ticker 30s linear infinite;
+    padding-left: 2rem;
+}
+
+.ticker-content:hover {
+    animation-play-state: paused;
+}
+
+.ticker-item {
+    color: var(--color-dark);
+    font-size: 1rem;
+    font-weight: 500;
+    margin-right: 3rem;
+    display: flex;
+    align-items: center;
+}
+
+.ticker-bullet {
+    color: var(--color-gold);
+    margin-right: 0.75rem;
+    font-size: 1.5rem;
+}
+
+@keyframes ticker {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 768px) {
+    .ticker-label {
+        padding: 0 1rem;
+        font-size: 0.8rem;
+    }
+
+    .ticker-item {
+        font-size: 0.9rem;
+        margin-right: 2rem;
+    }
+}
+
 /* 1. Hero */
 .hero {
     position: relative;
@@ -14,16 +107,17 @@
     display: flex;
     align-items: center;
     background: url('/college.png') center/cover no-repeat;
-    /* Uses a negative margin to pull under the transparent sticky navbar */
-    margin-top: -80px;
-    padding: 120px 0;
-    /* Generous breathing room */
+    /* Pull under the transparent sticky navbar */
+    margin-top: -60px;
+    padding: 10rem 0 6rem 0;
+    /* Standardized with page-header */
 }
 
 @media (max-width: 768px) {
     .hero {
         margin-top: -60px;
-        padding: 80px 0;
+        padding: 6rem 0 3rem 0;
+        /* Reduced padding for mobile */
         min-height: 80vh;
     }
 }

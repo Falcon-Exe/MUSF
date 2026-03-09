@@ -38,12 +38,18 @@
     color: var(--color-white);
 }
 
+.section-bg-green h1,
 .section-bg-green h2,
 .section-bg-green h3,
 .section-bg-green p,
 .section-bg-green .section-subtitle {
-    color: var(--color-white);
+    color: var(--color-white) !important;
 }
+
+.text-white {
+    color: var(--color-white) !important;
+}
+
 
 .section-bg-green .section-subtitle {
     opacity: 0.8;

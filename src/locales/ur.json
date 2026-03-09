@@ -1,0 +1,22 @@
+{
+    "translation": {
+        "nav": {
+            "home": "ہوم",
+            "about": "معلومات",
+            "leadership": "قیادت",
+            "activities": "سرگرمیاں",
+            "announcements": "اعلانات",
+            "gallery": "گیلری",
+            "contact": "رابطہ",
+            "support": "تعاون کریں"
+        },
+        "hero": {
+            "title_part1": "مجلس عمریہ",
+            "title_part2": "اسٹوڈنٹس فیڈریشن",
+            "tagline": "\"علم، اتحاد اور قیادت کے ساتھ طلباء کی خدمت کرتے ہوئے\"",
+            "cta_explore": "سرگرمیاں دیکھیں",
+            "cta_about": "ہمارے بارے میں",
+            "breaking_news": "اہم خبریں"
+        }
+    }
+}

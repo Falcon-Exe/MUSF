@@ -12,6 +12,7 @@ import EventTimeline from './pages/EventTimeline'
 import Announcements from './pages/Announcements'
 import Gallery from './pages/Gallery'
 import Contact from './pages/Contact'
+import Support from './pages/Support'
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/announcements" element={<Announcements />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/support" element={<Support />} />
         </Routes>
       </main>
       <Footer />

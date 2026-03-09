@@ -9,10 +9,12 @@ import { galleryFallbackData, instagramURL } from '../data/gallery';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useInstagramPosts } from '../hooks/useInstagramPosts';
 import { useContactForm } from '../hooks/useContactForm';
+import { useTranslation } from 'react-i18next';
 import StatCounter from '../components/StatCounter';
 import '../styles/Home.css';
 
 const Home = () => {
+  const { t } = useTranslation();
   useScrollReveal();
   const {
     isFormSubmitted,
@@ -25,7 +27,7 @@ const Home = () => {
 
   const stats = [
     { id: 1, icon: <FaUserGraduate size={32} />, label: "Active Students", num: 150, suffix: "+" },
-    { id: 2, icon: <FaSitemap size={32} />, label: "Departments", num: 13, suffix: "" },
+    { id: 2, icon: <FaSitemap size={32} />, label: "Departments", num: 11, suffix: "+" },
     { id: 3, icon: <FaCalendarCheck size={32} />, label: "Intellectual Conclaves", num: 4, suffix: "+" },
     { id: 4, icon: <FaMedal size={32} />, label: "Language Clubs", num: 3, suffix: "+" }
   ];
@@ -53,13 +55,13 @@ const Home = () => {
         <div className="hero-pattern"></div>
         <div className="container hero-container fade-in-up">
           <h1 className="hero-title">
-            <span className="text-accent">Majlis Umariyya</span><br />
-            Students Federation
+            <span className="text-accent">{t('hero.title_part1')}</span><br />
+            {t('hero.title_part2')}
           </h1>
-          <p className="hero-tagline">"Serving Students with Knowledge, Unity & Leadership"</p>
+          <p className="hero-tagline">{t('hero.tagline')}</p>
           <div className="hero-buttons">
-            <Link to="/activities" className="btn btn-primary hero-btn-primary">Explore Activities</Link>
-            <Link to="/about" className="btn hero-btn-secondary">About MUSF</Link>
+            <Link to="/activities" className="btn btn-primary hero-btn-primary">{t('hero.cta_explore')}</Link>
+            <Link to="/about" className="btn hero-btn-secondary">{t('hero.cta_about')}</Link>
           </div>
         </div>
         <div className="scroll-indicator">
@@ -69,6 +71,31 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* 1.5 News Ticker */}
+      <div className="news-ticker-container">
+        <div className="ticker-label">
+          <span>{t('hero.breaking_news')}</span>
+        </div>
+        <div className="ticker-wrapper">
+          <div className="ticker-content">
+            {announcementData.map((news, index) => (
+              <span key={index} className="ticker-item">
+                <span className="ticker-bullet">•</span>
+                {news.title}
+              </span>
+            ))}
+            {/* Duplicate for seamless loop */}
+            {announcementData.map((news, index) => (
+              <span key={`dup-${index}`} className="ticker-item">
+                <span className="ticker-bullet">•</span>
+                {news.title}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
 
       {/* 2. Statistics Section */}
       <section className="stats section reveal-on-scroll">

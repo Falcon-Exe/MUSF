@@ -1,3 +1,8 @@
+import {
+    FaPalette, FaBook, FaBullhorn, FaHandsHelping, FaRunning,
+    FaCalculator, FaUniversity, FaStore, FaLeaf, FaHeartbeat, FaLanguage, FaSearch
+} from 'react-icons/fa';
+
 export const leadershipData = {
     executive: [
         { id: "e1", name: "Razin", role: "Chairman", image: "/leaders/razin.jpeg" },
@@ -10,6 +15,7 @@ export const leadershipData = {
     subCommittees: [
         {
             title: "Auditors",
+            icon: <FaCalculator />,
             members: [
                 { id: "au1", name: "Saed", role: "Auditor", image: "" },
                 { id: "au2", name: "Ihsan", role: "Assi - Auditor", image: "" },
@@ -18,6 +24,7 @@ export const leadershipData = {
         },
         {
             title: "Fine Arts Wing",
+            icon: <FaPalette />,
             members: [
                 { id: "fa1", name: "Minhaj Ap", role: "Fine Arts Co-ordinator", image: "" },
                 { id: "fa2", name: "Rasak", role: "Asst. Co-Ordinator", image: "" },
@@ -30,6 +37,7 @@ export const leadershipData = {
         },
         {
             title: "Literary Wing",
+            icon: <FaBook />,
             members: [
                 { id: "lw1", name: "Shiyaf", role: "Literary Co-ordinator", image: "" },
                 { id: "lw2", name: "Marwan", role: "Asst Co-ordinator", image: "" },
@@ -43,6 +51,7 @@ export const leadershipData = {
         },
         {
             title: "Library Board",
+            icon: <FaBook />,
             members: [
                 { id: "lb1", name: "Abdulla Adil", role: "Chief Librarian", image: "" },
                 { id: "lb2", name: "Hisham", role: "Assi - Librarian", image: "" }
@@ -50,6 +59,7 @@ export const leadershipData = {
         },
         {
             title: "Research Wing",
+            icon: <FaBullhorn />,
             members: [
                 { id: "rw1", name: "Miqdad", role: "Research Co-ordinator", image: "" },
                 { id: "rw2", name: "Faseeh", role: "Asst Co-ordinator", image: "" },
@@ -60,6 +70,7 @@ export const leadershipData = {
         },
         {
             title: "Saving Bank",
+            icon: <FaUniversity />,
             members: [
                 { id: "sb1", name: "Nabeel", role: "Bank Manager", image: "" },
                 { id: "sb2", name: "Faris CA", role: "Asst. Manager", image: "" }
@@ -67,6 +78,7 @@ export const leadershipData = {
         },
         {
             title: "Health Department",
+            icon: <FaHeartbeat />,
             members: [
                 { id: "hd1", name: "Basith", role: "Chief Medical Officer (CMO)", image: "" },
                 { id: "hd2", name: "FAYIS", role: "Assi - Medical Officer (AMO)", image: "" },
@@ -77,6 +89,7 @@ export const leadershipData = {
         },
         {
             title: "Store Board",
+            icon: <FaStore />,
             members: [
                 { id: "st1", name: "Ramil PA", role: "Storekeeper", image: "" },
                 { id: "st2", name: "Hashir", role: "Assi - keeper", image: "" }
@@ -84,6 +97,7 @@ export const leadershipData = {
         },
         {
             title: "Garden Committee",
+            icon: <FaLeaf />,
             members: [
                 { id: "gc1", name: "Sinan", role: "Garden Leader", image: "" },
                 { id: "gc2", name: "Ajsal", role: "Assi - Leader", image: "" }
@@ -91,6 +105,7 @@ export const leadershipData = {
         },
         {
             title: "Social Affairs Board",
+            icon: <FaHandsHelping />,
             members: [
                 { id: "sa1", name: "Habeeb", role: "Social Affairs Co-Ordinator", image: "" },
                 { id: "sa2", name: "Mujeeb", role: "Asst Co-Ordinator", image: "" },
@@ -100,6 +115,7 @@ export const leadershipData = {
         },
         {
             title: "Sports Wing",
+            icon: <FaRunning />,
             members: [
                 { id: "sw1", name: "Anzar", role: "Captain", image: "" },
                 { id: "sw2", name: "Hadi", role: "Asst Captain", image: "" }
@@ -107,6 +123,7 @@ export const leadershipData = {
         },
         {
             title: "Public Relations & IT Department",
+            icon: <FaBullhorn />,
             members: [
                 { id: "pr1", name: "Basil km", role: "PRO", image: "" },
                 { id: "pr2", name: "Sabir", role: "APRO", image: "" },
@@ -121,6 +138,7 @@ export const leadershipData = {
         },
         {
             title: "Language Hub",
+            icon: <FaLanguage />,
             members: [
                 { id: "lh1", name: "Nizamudheen", role: "Co-ordinator", image: "" },
                 { id: "lh2", name: "Hashim(3)", role: "Assi-Co-ordinator", image: "" },

@@ -1,8 +1,10 @@
-import { activityData } from '../data/activities';
+import { activityData } from '../data/activities.jsx';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 import '../styles/Pages.css';
 import '../styles/ExtraPages.css';
 
 const Activities = () => {
+  useScrollReveal();
   const activities = activityData;
 
   return (
@@ -17,8 +19,8 @@ const Activities = () => {
       <div className="container section">
         <div className="grid grid-3">
           {activities.map(act => (
-            <div key={act.id} className="activity-card">
-              <div className="activity-icon-wrapper">
+            <div key={act.id} className="activity-card vm-card pattern-bg light-pattern reveal-on-scroll">
+              <div className="activity-icon">
                 {act.icon}
               </div>
               <div className="activity-content">

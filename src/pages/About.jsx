@@ -1,13 +1,14 @@
-import React from 'react';
 import SectionTitle from '../components/SectionTitle';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 import {
   FaBook, FaPalette, FaHandsHelping, FaBullhorn, FaRunning, FaMosque,
-  FaCalculator, FaUniversity, FaStore, FaLeaf
+  FaCalculator, FaUniversity, FaStore, FaLeaf, FaHeartbeat, FaLanguage
 } from 'react-icons/fa';
 import '../styles/Pages.css';
 import '../styles/MemberCard.css'; // Reuse member card animations/shadows if needed
 
 const About = () => {
+  useScrollReveal();
   return (
     <div className="about-page section-bg-offwhite min-h-screen">
       <header className="page-header pattern-bg section-bg-green text-white">
@@ -34,13 +35,13 @@ const About = () => {
         </div>
 
         <div className="vision-mission-grid">
-          <div className="vm-card pattern-bg light-pattern">
+          <div className="vm-card pattern-bg light-pattern reveal-on-scroll">
             <h3>Our Vision</h3>
             <p>
               Strengthen the upcoming generation with ideal youth and empower the Muslim society.
             </p>
           </div>
-          <div className="vm-card pattern-bg light-pattern">
+          <div className="vm-card pattern-bg light-pattern reveal-on-scroll">
             <h3>Our Mission</h3>
             <p>
               Mould the students to face the fast-moving world by equipping them with the qualities
@@ -71,13 +72,13 @@ const About = () => {
               { title: 'Research Wing', icon: <FaBullhorn />, desc: 'Promotes deep inquiry and intellectual exploration through specialized clubs and study circles.' },
               { title: 'Social Affairs Board', icon: <FaHandsHelping />, desc: 'Leads our community outreach, including charity drives, environmental initiatives, and CSS coordination.' },
               { title: 'Sports Wing', icon: <FaRunning />, desc: 'Promotes physical well-being and teamwork through annual athletic meets and inter-departmental tournaments.' },
-              { title: 'PR & IT Department', icon: <FaBullhorn />, desc: 'Manages MUSF\'s public voice, digital presence, and content creation across various platforms.' },
-              { title: 'Health Department', icon: <FaHandsHelping />, desc: 'Ensures the well-being of the student community through medical assistance and health awareness.' },
+              { title: 'Public Relations & IT Department', icon: <FaBullhorn />, desc: 'Manages MUSF\'s public voice, digital presence, and content creation across various platforms.' },
+              { title: 'Health Department', icon: <FaHeartbeat />, desc: 'Ensures the well-being of the student community through medical assistance and health awareness.' },
               { title: 'Library Board', icon: <FaBook />, desc: 'Oversees the management and enrichment of the college library resources for all students.' },
               { title: 'Saving Bank', icon: <FaUniversity />, desc: 'Facilitates internal financial management and encourages a culture of saving among the students.' },
               { title: 'Store Board', icon: <FaStore />, desc: 'Manages the campus store, ensuring essentials are available and accessible to the student community.' },
               { title: 'Garden Committee', icon: <FaLeaf />, desc: 'Dedicated to campus beautification, environmental sustainability, and maintaining our green spaces.' },
-              { title: 'Language Hub', icon: <FaPalette />, desc: 'Fosters multilingual skills through specialized clubs in Arabic, English, Malayalam, and Urdu.' }
+              { title: 'Language Hub', icon: <FaLanguage />, desc: 'Fosters multilingual skills through specialized clubs in Arabic, English, Malayalam, and Urdu.' }
 
             ].map((dept, idx) => (
               <div key={idx} className="member-card" style={{ padding: '2.5rem 1.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

@@ -10,7 +10,7 @@ export const announcementData = [
     },
     {
         id: 2,
-        date: 'Mar 10, 2026',
+        date: 'Soon, 2026',
         day: '10',
         month: 'MAR',
         title: 'Union Election Coming Soon... ',

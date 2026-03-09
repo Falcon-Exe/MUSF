@@ -34,7 +34,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(6, 78, 59, 0.65);
+    background-color: rgba(0, 0, 0, 0.65);
     /* Opacity reduced for visibility */
     z-index: 1;
 }
@@ -56,14 +56,15 @@
     position: relative;
     z-index: 3;
     text-align: center;
-    color: #ffffff !important;
+    color: var(--color-dark) !important;
     max-width: 900px;
     /* Constrains text width for balance */
     margin: 0 auto;
 }
 
+
 .hero-title {
-    color: #ffffff !important;
+    color: var(--color-green) !important;
     font-size: clamp(3rem, 6vw, 4.5rem);
     /* Roughly 48px to 72px */
     font-weight: 700;
@@ -76,9 +77,9 @@
 }
 
 .hero-tagline {
-    font-size: clamp(1.2rem, 3vw, 1.8rem);
-    margin-bottom: 3rem;
-    color: #ffffff !important;
+    font-size: clamp(0.2rem, 2.5vw, 1.8rem);
+    margin-bottom: 1rem;
+    color: var(--color-white) !important;
     font-style: italic;
     font-weight: 400;
     opacity: 0.9;
@@ -87,7 +88,7 @@
 .hero-buttons {
     display: flex;
     justify-content: center;
-    gap: 1.5rem;
+    gap: 1rem;
     flex-wrap: wrap;
 }
 
@@ -97,7 +98,7 @@
     font-size: 1.1rem;
     padding: 1rem 2.5rem;
     font-weight: 600;
-    box-shadow: 0 8px 20px rgba(251, 191, 36, 0.3);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
 }
 
 .hero-btn-primary:hover {
@@ -113,7 +114,7 @@
     font-size: 1.1rem;
     padding: 1rem 2.5rem;
     font-weight: 600;
-    border: 2px solid #ffffff !important;
+    border: 2px solid var(--color-white) !important;
 }
 
 .hero-btn-secondary:hover {
@@ -189,7 +190,7 @@
     height: 8px;
     background: var(--color-white);
     border-radius: 2px;
-    margin-top: 6px;
+    margin-top: 7px;
     animation: scroll 1.5s infinite;
 }
 
@@ -275,6 +276,10 @@
 @media (max-width: 768px) {
     .stat-card {
         padding: 1.5rem 1rem;
+    }
+
+    .activity-card {
+        padding: 2rem 1.25rem;
     }
 }
 
@@ -569,52 +574,6 @@
 
 .activities.revealed .activity-card:nth-child(4) {
     animation-delay: 0.4s;
-}
-
-.activity-card:hover {
-    border-color: var(--color-green);
-    box-shadow: 0 15px 30px rgba(6, 78, 59, 0.15);
-    background-color: var(--color-green);
-    transform: translateY(-10px);
-}
-
-.activity-icon {
-    color: var(--color-green);
-    margin-bottom: 1.5rem;
-    transition: all 0.4s ease;
-    display: flex;
-    justify-content: center;
-}
-
-.activity-icon svg {
-    font-size: 2.5rem;
-}
-
-.activity-card:hover .activity-icon {
-    color: var(--color-gold);
-    transform: scale(1.15) rotate(5deg);
-}
-
-.activity-card h3 {
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-green);
-    transition: color 0.4s ease;
-}
-
-.activity-card:hover h3 {
-    color: var(--color-white);
-}
-
-.activity-card p {
-    margin: 0;
-    color: #475569;
-    transition: color 0.4s ease;
-}
-
-.activity-card:hover p {
-    color: rgba(255, 255, 255, 0.9);
 }
 
 /* 6. Announcements */

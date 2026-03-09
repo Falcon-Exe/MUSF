@@ -1,63 +1,63 @@
-/* Activities */
+/* Activity Card Base */
 .activity-card {
-    background: var(--color-white);
     border-radius: var(--radius-lg);
-    padding: 3rem 2rem;
+    padding: 2rem 1.8rem;
     box-shadow: var(--shadow-sm);
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-align: center;
-    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
     border: 1px solid var(--color-lightgray);
-    opacity: 1 !important;
-    transform: none !important;
+    background: var(--color-white);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
 }
 
-@media (max-width: 768px) {
-    .activity-card {
-        padding: 2rem 1.5rem;
-    }
+/* Hover Effect */
+.activity-card.vm-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
 }
 
-.activity-card:hover {
-    transform: translateY(-5px) !important;
-    box-shadow: var(--shadow-lg);
-    border-color: var(--color-gold);
+/* Revealed State */
+.activity-card.vm-card.revealed {
+    border: 2px solid var(--color-black);
 }
 
-.activity-icon-wrapper {
-    margin-bottom: 1.5rem;
-    background: var(--color-offwhite);
-    width: 80px;
-    height: 80px;
+/* Icon Circle */
+.activity-icon {
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
+    background: var(--color-green);
+    color: var(--color-white);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-gold);
-}
-
-.activity-icon-wrapper svg {
-    font-size: 2.2rem;
-}
-
-.activity-title {
-    color: var(--color-green);
-    font-size: 1.5rem;
     margin-bottom: 1rem;
-    transition: color var(--transition-normal);
+    transition: transform 0.3s ease;
+}
+
+.activity-card:hover .activity-icon {
+    transform: scale(1.1);
+}
+
+.activity-icon svg {
+    font-size: 2rem;
+}
+
+/* Typography */
+.activity-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--color-gold);
+    margin-top: 0.3rem;
 }
 
 .activity-desc {
-    color: var(--color-dark);
+    color: var(--color-black);
     line-height: 1.6;
-    transition: color var(--transition-normal);
-}
-
-.activity-card:hover .activity-title,
-.activity-card:hover .activity-desc {
-    color: var(--color-white);
+    margin-top: 0.5rem;
 }
 
 .text-gold {
@@ -105,14 +105,6 @@
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--color-lightgray);
     transition: all var(--transition-normal);
-}
-
-@media (max-width: 768px) {
-    .announcement-card {
-        flex-direction: column;
-        padding: 1.5rem;
-        gap: 1rem;
-    }
 }
 
 .announcement-card:hover {
@@ -167,6 +159,7 @@
     transition: color var(--transition-normal);
 }
 
+/* Announcement Hover Text Colors */
 .announcement-card:hover .announcement-title,
 .announcement-card:hover .announcement-desc,
 .announcement-card:hover .announcement-page-date {
@@ -176,4 +169,31 @@
 .announcement-card:hover .announcement-badge {
     color: var(--color-white) !important;
     border-color: var(--color-white) !important;
+}
+
+/* Mobile Responsive - Consolidated */
+@media (max-width: 768px) {
+    .activities-page .container.section {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .activity-card {
+        padding: 1.8rem 1.4rem;
+    }
+
+    .activity-title {
+        font-size: 1.25rem;
+    }
+
+    .activity-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .announcement-card {
+        flex-direction: column;
+        padding: 1.5rem;
+        gap: 1rem;
+    }
 }

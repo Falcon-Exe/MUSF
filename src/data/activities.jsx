@@ -9,10 +9,23 @@ import {
     FaLeaf,
     FaHeartbeat,
     FaCogs,
-    FaTheaterMasks
+    FaTheaterMasks,
+    FaCompass
 } from 'react-icons/fa';
 
 export const activityData = [
+    {
+        id: 5,
+        title: 'Sports Meet',
+        icon: <FaRunning />,
+        desc: 'Our annual grand athletic meet featuring track and field events, inter-departmental tournaments, and house-wise competitions.'
+    },
+    {
+        id: 6,
+        title: 'Media Conclave',
+        icon: <FaBullhorn />,
+        desc: 'A specialized platform for training in graphic design, journalism, and digital media, featuring sessions by industry experts.'
+    },
     {
         id: 1,
         title: 'Academic Conclaves',
@@ -38,18 +51,6 @@ export const activityData = [
         desc: 'Dynamic language clubs, debating societies, and content writing workshops aimed at honing critical thinking and public speaking.'
     },
     {
-        id: 5,
-        title: 'Sports & Athletics',
-        icon: <FaRunning />,
-        desc: 'Annual sports meets and inter-departmental tournaments that promote physical well-being, teamwork, and healthy competition.'
-    },
-    {
-        id: 6,
-        title: 'Media & IT Training',
-        icon: <FaBullhorn />,
-        desc: 'Hands-on training in graphic design, video editing, and IT skills, preparing students for the modern digital era.'
-    },
-    {
         id: 7,
         title: 'Environmental Projects',
         icon: <FaLeaf />,
@@ -60,5 +61,11 @@ export const activityData = [
         title: 'Health & Wellness',
         icon: <FaHeartbeat />,
         desc: 'Medical camps and health awareness seminars to ensure the physical and mental well-being of our student body.'
+    },
+    {
+        id: 9,
+        title: 'Career Guidance',
+        icon: <FaCompass />,
+        desc: 'Specialized counseling sessions and career workshops to help students navigate their professional paths and higher education choices.'
     }
 ];

@@ -1,103 +1,122 @@
-    .navbar {
-        background-color: transparent;
-        height: 80px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: sticky;
-        top: 0;
-        z-index: 999;
-        transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    }
+.navbar {
+    background-color: transparent;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
 
-    .navbar.scrolled {
-        background-color: var(--color-white);
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    }
+.navbar.scrolled {
+    background-color: var(--color-white);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
 
-    .nav-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-    }
+.navbar.scrolled {
+    background-color: var(--color-white);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
 
-    .nav-logo {
-        color: var(--color-green);
-        font-size: 1.8rem;
-        font-weight: 700;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        flex-shrink: 0;
-    }
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
 
-    .logo-img {
-        height: 60px;
-        width: auto;
-        object-fit: contain;
-    }
+.nav-logo {
+    color: var(--color-green);
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
 
+.logo-img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    text-align: center;
+}
+
+.nav-item {
+    margin-left: 2rem;
+}
+
+.nav-links {
+    color: var(--color-green);
+    /* Changed to green for contrast */
+    font-weight: 500;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-links:hover,
+.nav-links.active {
+    color: var(--color-gold);
+    /* Gold highlight on white looks professional */
+}
+
+.menu-icon {
+    display: none;
+    cursor: pointer;
+    color: var(--color-dark);
+}
+
+@media screen and (max-width: 960px) {
     .nav-menu {
         display: flex;
-        align-items: center;
-        list-style: none;
-        text-align: center;
+        flex-direction: column;
+        width: 70%;
+        /* Adjusted width for better mobile feel */
+        height: 100vh;
+        position: fixed;
+        /* Changed to fixed to cover full height */
+        top: 0;
+        left: 100%;
+        /* Starts hidden on the right */
+        background-color: var(--color-white);
+        /* Changed Green to White */
+        padding: 5rem 0;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        transition: all 0.5s ease;
+    }
+
+
+    /* When menu is open */
+    .nav-menu.active {
+        left: 30%;
+        /* Slides in from the right, leaving 30% gap on the left */
+        background-color: var(--color-green);
+        /* Kept White */
     }
 
     .nav-item {
-        margin-left: 2rem;
+        margin: 1.5rem 0;
     }
 
     .nav-links {
-        color: var(--color-dark);
-        font-weight: 500;
-        font-size: 1.1rem;
-    }
-
-    .nav-links:hover,
-    .nav-links.active {
-        color: var(--color-green);
+        color: var(--color-white);
+        /* Links remain green on the white background */
+        font-size: 1.5rem;
     }
 
     .menu-icon {
-        display: none;
-        cursor: pointer;
-        color: var(--color-dark);
+        display: block;
+        z-index: 1001;
+        /* Ensure icon stays above the white menu */
     }
-
-    @media screen and (max-width: 960px) {
-        .nav-menu {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            position: absolute;
-            top: 80px;
-            left: -100%;
-            opacity: 1;
-            transition: all 0.5s ease;
-            background-color: var(--color-white);
-            padding: 2rem 0;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-
-        .nav-menu.active {
-            background-color: var(--color-white);
-            left: 0;
-            opacity: 1;
-            transition: all 0.5s ease;
-        }
-
-        .nav-item {
-            margin: 1.5rem 0;
-        }
-
-        .nav-links {
-            font-size: 1.5rem;
-        }
-
-        .menu-icon {
-            display: block;
-        }
-    }
+}

@@ -7,7 +7,6 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Constitution from './pages/Constitution'
 import Leadership from './pages/Leadership'
-import PastLeadership from './pages/PastLeadership'
 import Activities from './pages/Activities'
 import EventTimeline from './pages/EventTimeline'
 import Announcements from './pages/Announcements'
@@ -24,7 +23,6 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/constitution" element={<Constitution />} />
           <Route path="/leadership" element={<Leadership />} />
-          <Route path="/past-leadership" element={<PastLeadership />} />
           <Route path="/activities" element={<Activities />} />
           <Route path="/events-timeline" element={<EventTimeline />} />
           <Route path="/announcements" element={<Announcements />} />

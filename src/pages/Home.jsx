@@ -4,7 +4,7 @@ import { FaUsers, FaBook, FaHandsHelping, FaMicrophone, FaUserGraduate, FaSitema
 import { leadershipData } from '../data/leaders';
 import { announcementData } from '../data/announcements';
 import { contactData } from '../data/contact';
-import { activityData } from '../data/activities';
+import { activityData } from '../data/activities.jsx';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import StatCounter from '../components/StatCounter';
 import '../styles/Home.css';
@@ -45,7 +45,7 @@ const Home = () => {
 
   const stats = [
     { id: 1, icon: <FaUserGraduate size={32} />, label: "Active Students", num: 150, suffix: "+" },
-    { id: 2, icon: <FaSitemap size={32} />, label: "Sub Committees", num: 10, suffix: "+" },
+    { id: 2, icon: <FaSitemap size={32} />, label: "Departments", num: 13, suffix: "" },
     { id: 3, icon: <FaCalendarCheck size={32} />, label: "Intellectual Conclaves", num: 4, suffix: "+" },
     { id: 4, icon: <FaMedal size={32} />, label: "Language Clubs", num: 3, suffix: "+" }
   ];
@@ -54,13 +54,10 @@ const Home = () => {
 
   const activities = activityData.slice(0, 4);
 
-
-
   const [instagramPosts, setInstagramPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Try fetching real instagram posts
   useEffect(() => {
     const fetchInstagramPosts = async () => {
       const token = import.meta.env.VITE_INSTAGRAM_TOKEN;
@@ -100,13 +97,12 @@ const Home = () => {
 
   const getInitialStyle = (name) => {
     const gradients = [
-      'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)', // Indigo-Purple
-      'linear-gradient(135deg, #3b82f6 0%, #2dd4bf 100%)', // Blue-Teal
-      'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)', // Amber-Red
-      'linear-gradient(135deg, #10b981 0%, #3b82f6 100%)', // Emerald-Blue
-      'linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%)'  // Pink-Violet
+      'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
+      'linear-gradient(135deg, #3b82f6 0%, #2dd4bf 100%)',
+      'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
+      'linear-gradient(135deg, #10b981 0%, #3b82f6 100%)',
+      'linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%)'
     ];
-    // Simple hash to consistently pick a gradient based on name
     const index = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % gradients.length;
     return { background: gradients[index] };
   };
@@ -116,7 +112,6 @@ const Home = () => {
       {/* 1. Hero Section */}
       <section className="hero">
         <div className="hero-overlay"></div>
-        {/* Subtle geometric pattern overlay */}
         <div className="hero-pattern"></div>
         <div className="container hero-container fade-in-up">
           <h1 className="hero-title">
@@ -219,27 +214,29 @@ const Home = () => {
               </div>
             ))}
           </div>
-        </div >
-      </section >
+        </div>
+      </section>
 
       {/* 5. Activities Section */}
-      < section className="activities section reveal-on-scroll" >
+      <section className="activities section reveal-on-scroll">
         <div className="container">
           <h2 className="section-title">Activities</h2>
           <div className="activities-grid">
             {activities.map((act, index) => (
-              <div key={index} className="activity-card">
-                <div className="activity-icon">{act.icon}</div>
+              <div key={index} className="activity-card vm-card pattern-bg light-pattern reveal-on-scroll">
+                <div className="activity-icon">
+                  {act.icon}
+                </div>
                 <h3>{act.title}</h3>
                 <p>{act.desc}</p>
               </div>
             ))}
           </div>
         </div>
-      </section >
+      </section>
 
       {/* 6. Announcements Section */}
-      < section className="announcements section reveal-on-scroll" >
+      <section className="announcements section reveal-on-scroll">
         <div className="container">
           <h2 className="section-title">Latest Announcements</h2>
           <div className="announcement-container">
@@ -261,10 +258,10 @@ const Home = () => {
           </div>
           <Link to="/announcements" className="view-all-link">View all announcements &rarr;</Link>
         </div>
-      </section >
+      </section>
 
       {/* 7. Event Gallery */}
-      < section className="gallery section reveal-on-scroll" >
+      <section className="gallery section reveal-on-scroll">
         <div className="container">
           <h2 className="section-title">Event Gallery</h2>
           <div className="home-gallery-grid">
@@ -300,19 +297,19 @@ const Home = () => {
             ))}
           </div>
         </div>
-      </section >
+      </section>
 
       {/* 9. Call to Action */}
-      < section className="cta section reveal-on-scroll" >
+      <section className="cta section reveal-on-scroll">
         <div className="container cta-container">
           <h2>Join the Journey of Knowledge and Leadership</h2>
           <p>Become part of MUSF initiatives.</p>
           <Link to="/contact" className="btn btn-primary cta-btn">Contact Us</Link>
         </div>
-      </section >
+      </section>
 
       {/* 10. Contact Section */}
-      < section className="contact section reveal-on-scroll" >
+      <section className="contact section reveal-on-scroll">
         <div className="container">
           <h2 className="section-title">Contact</h2>
           <div className="contact-card-wrapper">
@@ -357,7 +354,7 @@ const Home = () => {
                     </div>
                     <div className="form-group">
                       <label htmlFor="email">Email</label>
-                      <input type="email" id="email" name="email" placeholder="Your Email Focus" required />
+                      <input type="email" id="email" name="email" placeholder="Your Email" required />
                     </div>
                     <div className="form-group">
                       <label htmlFor="message">Message</label>
@@ -372,8 +369,8 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section >
-    </div >
+      </section>
+    </div>
   );
 };
 

@@ -7,7 +7,7 @@ const __dirname = path.dirname(__filename);
 
 const pages = [
     'Home', 'About', 'Constitution', 'Leadership',
-    'PastLeadership', 'Activities', 'EventTimeline',
+    'Activities', 'EventTimeline',
     'Announcements', 'Gallery', 'Contact'
 ];
 

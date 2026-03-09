@@ -1,3 +1,4 @@
+import { FaInstagram } from 'react-icons/fa';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useInstagramPosts } from '../hooks/useInstagramPosts';
 import { galleryFallbackData, instagramURL } from '../data/gallery';

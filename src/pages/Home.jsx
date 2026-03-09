@@ -256,11 +256,11 @@ const Home = () => {
                 <h3 className="contact-college-name">Majlis Umariyya Wafy College</h3>
                 <div className="contact-detail-item">
                   <strong>Email:</strong>
-                  <a href={contactData.email.addresses[0].link}>{contactData.email.addresses[0].value}</a>
+                  <a href={contactData.email.addresses[0]?.link || '#'}>{contactData.email.addresses[0]?.value || 'N/A'}</a>
                 </div>
                 <div className="contact-detail-item">
                   <strong>Phone:</strong>
-                  <a href={contactData.phone.numbers[2].link}>{contactData.phone.numbers[2].value}</a>
+                  <a href={contactData.phone.numbers[0]?.link || '#'}>{contactData.phone.numbers[0]?.value || 'N/A'}</a>
                 </div>
                 <div className="map-container">
                   <iframe

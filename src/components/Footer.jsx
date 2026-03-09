@@ -19,7 +19,6 @@ const Footer = () => {
                         <li><Link to="/about">About Us</Link></li>
                         <li><Link to="/leadership">Leadership</Link></li>
                         <li><Link to="/contact">Contact</Link></li>
-                        <li><Link to="/support">Support Us</Link></li>
                     </ul>
                 </div>
                 <div className="footer-col">

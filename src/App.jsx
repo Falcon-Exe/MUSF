@@ -29,7 +29,7 @@ function App() {
           <Route path="/announcements" element={<Announcements />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/support" element={<Support />} />
+          {/* <Route path="/support" element={<Support />} /> */}
         </Routes>
       </main>
       <Footer />

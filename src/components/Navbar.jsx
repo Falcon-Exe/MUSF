@@ -38,8 +38,7 @@ const Navbar = () => {
         { name: t('nav.activities'), path: '/activities' },
         { name: t('nav.announcements'), path: '/announcements' },
         { name: t('nav.gallery'), path: '/gallery' },
-        { name: t('nav.contact'), path: '/contact' },
-        { name: t('nav.support'), path: '/support' }
+        { name: t('nav.contact'), path: '/contact' }
     ];
 
     const languages = [

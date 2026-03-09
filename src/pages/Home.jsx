@@ -27,7 +27,7 @@ const Home = () => {
 
   const stats = [
     { id: 1, icon: <FaUserGraduate size={32} />, label: "Active Students", num: 150, suffix: "+" },
-    { id: 2, icon: <FaSitemap size={32} />, label: "Departments", num: 11, suffix: "+" },
+    { id: 2, icon: <FaSitemap size={32} />, label: "Departments", num: 10, suffix: "+" },
     { id: 3, icon: <FaCalendarCheck size={32} />, label: "Intellectual Conclaves", num: 4, suffix: "+" },
     { id: 4, icon: <FaMedal size={32} />, label: "Language Clubs", num: 3, suffix: "+" }
   ];

@@ -5,6 +5,7 @@ const StatCounter = ({ endValue, suffix = '+' }) => {
     const countRef = useRef(null);
 
     useEffect(() => {
+        let timer;
         const observer = new IntersectionObserver(
             (entries) => {
                 if (entries[0].isIntersecting) {
@@ -15,7 +16,7 @@ const StatCounter = ({ endValue, suffix = '+' }) => {
                     const duration = 2000;
                     const increment = end / (duration / 16);
 
-                    const timer = setInterval(() => {
+                    timer = setInterval(() => {
                         start += increment;
                         if (start >= end) {
                             setCount(end);
@@ -35,6 +36,7 @@ const StatCounter = ({ endValue, suffix = '+' }) => {
 
         return () => {
             observer.disconnect();
+            if (timer) clearInterval(timer);
         };
     }, [endValue]);
 

@@ -1,41 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaCheckCircle } from 'react-icons/fa';
 import { contactData } from '../data/contact';
+import { useContactForm } from '../hooks/useContactForm';
 import '../styles/Pages.css';
 import '../styles/ContactGallery.css';
 
 const Contact = () => {
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleContactSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    const form = e.target;
-    const data = new FormData(form);
-
-    try {
-      const response = await fetch(form.action, {
-        method: form.method,
-        body: data,
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
-
-      if (response.ok) {
-        setIsFormSubmitted(true);
-        form.reset();
-      } else {
-        alert("Oops! There was a problem submitting your form");
-      }
-    } catch (error) {
-      alert("Oops! There was a problem submitting your form");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  const {
+    isFormSubmitted,
+    isSubmitting,
+    handleContactSubmit,
+    resetFormStatus
+  } = useContactForm(contactData.formEndpoint);
 
   return (
     <div className="contact-page section-bg-offwhite min-h-screen">
@@ -108,7 +84,7 @@ const Contact = () => {
                   <FaCheckCircle className="success-icon" />
                   <h3>Message Sent!</h3>
                   <p>Thank you for reaching out to us. We will get back to you shortly.</p>
-                  <button onClick={() => setIsFormSubmitted(false)} className="new-message-btn">Send Another Message</button>
+                  <button onClick={resetFormStatus} className="new-message-btn">Send Another Message</button>
                 </div>
               ) : (
                 <>

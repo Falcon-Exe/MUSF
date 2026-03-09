@@ -1,47 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaUsers, FaBook, FaHandsHelping, FaMicrophone, FaUserGraduate, FaSitemap, FaCalendarCheck, FaMedal, FaInstagram, FaCheckCircle, FaChevronDown } from 'react-icons/fa';
 import { leadershipData } from '../data/leaders';
 import { announcementData } from '../data/announcements';
 import { contactData } from '../data/contact';
 import { activityData } from '../data/activities.jsx';
+import { galleryFallbackData, instagramURL } from '../data/gallery';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useInstagramPosts } from '../hooks/useInstagramPosts';
+import { useContactForm } from '../hooks/useContactForm';
 import StatCounter from '../components/StatCounter';
 import '../styles/Home.css';
 
 const Home = () => {
   useScrollReveal();
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const {
+    isFormSubmitted,
+    isSubmitting,
+    handleContactSubmit,
+    resetFormStatus
+  } = useContactForm(contactData.formEndpoint);
 
-  const handleContactSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    const form = e.target;
-    const data = new FormData(form);
-
-    try {
-      const response = await fetch(form.action, {
-        method: form.method,
-        body: data,
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
-
-      if (response.ok) {
-        setIsFormSubmitted(true);
-        form.reset();
-      } else {
-        alert("Oops! There was a problem submitting your form");
-      }
-    } catch (error) {
-      alert("Oops! There was a problem submitting your form");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  const { instagramPosts } = useInstagramPosts(6);
 
   const stats = [
     { id: 1, icon: <FaUserGraduate size={32} />, label: "Active Students", num: 150, suffix: "+" },
@@ -50,50 +30,8 @@ const Home = () => {
     { id: 4, icon: <FaMedal size={32} />, label: "Language Clubs", num: 3, suffix: "+" }
   ];
 
-  const instagramURL = "https://www.instagram.com/musf_puramannur";
 
   const activities = activityData.slice(0, 4);
-
-  const [instagramPosts, setInstagramPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchInstagramPosts = async () => {
-      const token = import.meta.env.VITE_INSTAGRAM_TOKEN;
-
-      if (!token) {
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const response = await fetch(
-          `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,thumbnail_url&access_token=${token}`
-        );
-        const data = await response.json();
-
-        if (data.data) {
-          const formattedPosts = data.data.slice(0, 6).map((post, i) => ({
-            id: post.id,
-            url: post.media_type === 'VIDEO' ? post.thumbnail_url : post.media_url,
-            alt: post.caption ? post.caption.substring(0, 40) : `Instagram post ${i + 1}`,
-            link: post.permalink
-          }));
-          setInstagramPosts(formattedPosts);
-        } else {
-          setError('Failed to load real posts.');
-        }
-      } catch (err) {
-        console.error("Error fetching Instagram posts:", err);
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchInstagramPosts();
-  }, []);
 
   const getInitialStyle = (name) => {
     const gradients = [
@@ -155,7 +93,7 @@ const Home = () => {
       <section className="about section reveal-on-scroll">
         <div className="container about-grid">
           <div className="about-image">
-            <img src="/college.png" alt="MUSF Students" className="about-img" />
+            <img src="/college.png" alt="MUSF Students" className="about-img" loading="lazy" />
           </div>
           <div className="about-content">
             <h2>About Us</h2>
@@ -240,7 +178,7 @@ const Home = () => {
         <div className="container">
           <h2 className="section-title">Latest Announcements</h2>
           <div className="announcement-container">
-            {announcementData.map((item, idx) => (
+            {announcementData.map((item) => (
               <Link to="/announcements" key={item.id} className="announcement-card-link">
                 <div className="announcement-card-item">
                   <div className="announcement-date">
@@ -265,7 +203,7 @@ const Home = () => {
         <div className="container">
           <h2 className="section-title">Event Gallery</h2>
           <div className="home-gallery-grid">
-            {instagramPosts.map((item, idx) => (
+            {(instagramPosts.length > 0 ? instagramPosts : galleryFallbackData).map((item, idx) => (
               <a
                 href={item.link || instagramURL}
                 target="_blank"
@@ -344,7 +282,7 @@ const Home = () => {
                     <FaCheckCircle className="success-icon" />
                     <h3>Message Sent!</h3>
                     <p>Thank you for reaching out to us. We will get back to you shortly.</p>
-                    <button onClick={() => setIsFormSubmitted(false)} className="btn btn-outline new-message-btn">Send Another Message</button>
+                    <button onClick={resetFormStatus} className="btn btn-outline new-message-btn">Send Another Message</button>
                   </div>
                 ) : (
                   <form action={contactData.formEndpoint} method="POST" className="premium-contact-form" onSubmit={handleContactSubmit}>

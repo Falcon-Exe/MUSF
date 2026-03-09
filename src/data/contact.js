@@ -7,9 +7,9 @@ export const contactData = {
     phone: {
         title: 'Call Us',
         numbers: [
-            { label: 'General Inquiry', value: '+91 82899 49746', link: 'tel:+918289949746' },
-            { label: 'Office', value: '+91 75599 76086', link: 'tel:+917559976086' },
-            { label: 'Secondary', value: '+91 89435 39446', link: 'tel:+918943539446' }
+            // { label: 'General Inquiry', value: '+91 82899 49746', link: 'tel:+918289949746' },
+            // { label: 'Office', value: '+91 75599 76086', link: 'tel:+917559976086' },
+            { label: 'PRO', value: '+91 89435 39446', link: 'tel:+918943539446' }
         ]
     },
     email: {

@@ -11,11 +11,11 @@ const Navbar = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > 50) {
-                setIsScrolled(true);
-            } else {
-                setIsScrolled(false);
-            }
+            const scrolled = window.scrollY > 50;
+            setIsScrolled((prev) => {
+                if (prev !== scrolled) return scrolled;
+                return prev;
+            });
         };
 
         window.addEventListener('scroll', handleScroll, { passive: true });

@@ -8,9 +8,9 @@ import '../styles/Home.css';
 
 const Gallery = () => {
   useScrollReveal();
-  const { instagramPosts } = useInstagramPosts(18);
+  const { instagramPosts, loading, error } = useInstagramPosts(18);
 
-  const postsToDisplay = instagramPosts.length > 0 ? instagramPosts : galleryFallbackData;
+  const postsToDisplay = (instagramPosts && instagramPosts.length > 0) ? instagramPosts : galleryFallbackData;
 
   return (
     <div className="gallery-page section-bg-offwhite min-h-screen">

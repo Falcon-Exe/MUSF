@@ -4,7 +4,13 @@ export const galleryFallbackData = [
     { id: 3, url: '/instagram/post3.jpg', alt: 'ETHICS IN ECONOMICS' },
     { id: 4, url: '/instagram/post4.jpg', alt: 'ramadan mubark' },
     { id: 5, url: '/instagram/post5.jpg', alt: 'seminar cngrts' },
-    { id: 6, url: '/instagram/post6.jpg', alt: 'Untitled-33' }
+    { id: 6, url: '/instagram/post6.jpg', alt: 'Untitled-33' },
+    { id: 7, url: '/instagram/post1.jpg', alt: 'BUDGET BLUEPRINT' },
+    { id: 8, url: '/instagram/post2.png', alt: 'cricket1' },
+    { id: 9, url: '/instagram/post3.jpg', alt: 'ETHICS IN ECONOMICS' },
+    { id: 10, url: '/instagram/post4.jpg', alt: 'ramadan mubark' },
+    { id: 11, url: '/instagram/post5.jpg', alt: 'seminar cngrts' },
+    { id: 12, url: '/instagram/post6.jpg', alt: 'Untitled-33' }
 ];
 
 export const instagramURL = "https://www.instagram.com/musf_puramannur";

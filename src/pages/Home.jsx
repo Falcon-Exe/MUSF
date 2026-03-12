@@ -23,7 +23,7 @@ const Home = () => {
     resetFormStatus
   } = useContactForm(contactData.formEndpoint);
 
-  const { instagramPosts } = useInstagramPosts(6);
+  const { instagramPosts, loading, error } = useInstagramPosts(6);
 
   const stats = [
     { id: 1, icon: <FaUserGraduate size={32} />, label: "Active Students", num: 150, suffix: "+" },

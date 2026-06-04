@@ -1,0 +1,199 @@
+/* Activity Card Base */
+.activity-card {
+    border-radius: var(--radius-lg);
+    padding: 2rem 1.8rem;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid var(--color-lightgray);
+    background: var(--color-white);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+/* Hover Effect */
+.activity-card.vm-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Revealed State */
+.activity-card.vm-card.revealed {
+    border: 2px solid var(--color-black);
+}
+
+/* Icon Circle */
+.activity-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: var(--color-green);
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.activity-card:hover .activity-icon {
+    transform: scale(1.1);
+}
+
+.activity-icon svg {
+    font-size: 2rem;
+}
+
+/* Typography */
+.activity-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--color-gold);
+    margin-top: 0.3rem;
+}
+
+.activity-desc {
+    color: var(--color-black);
+    line-height: 1.6;
+    margin-top: 0.5rem;
+}
+
+.text-gold {
+    color: var(--color-gold);
+}
+
+/* Table */
+.leadership-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.leadership-table th,
+.leadership-table td {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-lightgray);
+}
+
+.leadership-table th {
+    background-color: var(--color-green);
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+.leadership-table tr:hover td {
+    background-color: var(--color-offwhite);
+}
+
+/* Announcements */
+.announcements-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.announcement-card {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-lightgray);
+    transition: all var(--transition-normal);
+}
+
+.announcement-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    background-color: var(--color-green);
+    border-color: var(--color-gold);
+}
+
+.announcement-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.announcement-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.announcement-page-date {
+    color: var(--color-gray);
+    font-size: 0.9rem;
+    transition: color var(--transition-normal);
+}
+
+.announcement-badge {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.2rem 0.8rem;
+    border-radius: var(--radius-full);
+    border: 1px solid;
+    transition: all var(--transition-normal);
+}
+
+.announcement-title {
+    color: var(--color-green);
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    transition: color var(--transition-normal);
+}
+
+.announcement-desc {
+    color: var(--color-dark);
+    line-height: 1.6;
+    transition: color var(--transition-normal);
+}
+
+/* Announcement Hover Text Colors */
+.announcement-card:hover .announcement-title,
+.announcement-card:hover .announcement-desc,
+.announcement-card:hover .announcement-page-date {
+    color: var(--color-white);
+}
+
+.announcement-card:hover .announcement-badge {
+    color: var(--color-white) !important;
+    border-color: var(--color-white) !important;
+}
+
+/* Mobile Responsive - Consolidated */
+@media (max-width: 768px) {
+    .activities-page .container.section {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .activity-card {
+        padding: 1.8rem 1.4rem;
+    }
+
+    .activity-title {
+        font-size: 1.25rem;
+    }
+
+    .activity-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .announcement-card {
+        flex-direction: column;
+        padding: 1.5rem;
+        gap: 1rem;
+    }
+}

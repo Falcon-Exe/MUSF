@@ -229,7 +229,7 @@ const Home = () => {
         <div className="container">
           <h2 className="section-title">Event Gallery</h2>
           <iframe 
-            src="https://api-insta-ebon.vercel.app/?bg=0f172a&padding=1rem" 
+            src="https://api-insta-ebon.vercel.app/?bg=transparent&padding=1rem" 
             width="100%" 
             height="800px" 
             style={{ border: "none", borderRadius: "12px", overflow: "hidden" }} 

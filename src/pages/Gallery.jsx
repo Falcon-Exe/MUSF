@@ -19,7 +19,7 @@ const Gallery = () => {
       <section className="gallery section reveal-on-scroll">
         <div className="container">
           <iframe 
-            src="https://api-insta-ebon.vercel.app/?bg=0f172a&padding=1rem" 
+            src="https://api-insta-ebon.vercel.app/?bg=transparent&padding=1rem" 
             width="100%" 
             height="800px" 
             style={{ border: "none", borderRadius: "12px", overflow: "hidden" }} 

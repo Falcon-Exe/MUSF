@@ -5,7 +5,7 @@ import { leadershipData } from '../data/leaders';
 import { announcementData } from '../data/announcements';
 import { contactData } from '../data/contact';
 import { activityData } from '../data/activities.jsx';
-import { galleryFallbackData, instagramURL } from '../data/gallery';
+
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useContactForm } from '../hooks/useContactForm';
 import { useTranslation } from 'react-i18next';
@@ -13,6 +13,7 @@ import StatCounter from '../components/StatCounter';
 import '../styles/Home.css';
 
 const Home = () => {
+  const [iframePointerEvents, setIframePointerEvents] = React.useState('none');
   const { t } = useTranslation();
   useScrollReveal();
   const {
@@ -228,13 +229,39 @@ const Home = () => {
       <section className="gallery section reveal-on-scroll">
         <div className="container">
           <h2 className="section-title">Event Gallery</h2>
-          <iframe 
-            src="https://api-insta-ebon.vercel.app/?bg=transparent&padding=1rem" 
-            width="100%" 
-            height="800px" 
-            style={{ border: "none", borderRadius: "12px", overflow: "hidden" }} 
-            title="Union Instagram Feed"
-          />
+          <div 
+            onClick={() => setIframePointerEvents('auto')}
+            onMouseLeave={() => setIframePointerEvents('none')}
+            style={{ position: 'relative', width: '100%', height: '800px' }}
+          >
+            {iframePointerEvents === 'none' && (
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                zIndex: 1,
+                cursor: 'pointer',
+                borderRadius: '12px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: 'rgba(0, 0, 0, 0.03)'
+              }}>
+                <span className="btn btn-outline" style={{ background: 'var(--color-white)', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
+                  Click to Interact with Feed
+                </span>
+              </div>
+            )}
+            <iframe 
+              src="https://api-insta-ebon.vercel.app/?bg=transparent&padding=1rem" 
+              width="100%" 
+              height="800px" 
+              style={{ border: "none", borderRadius: "12px", overflow: "hidden", pointerEvents: iframePointerEvents }} 
+              title="Union Instagram Feed"
+            />
+          </div>
         </div>
       </section>
 

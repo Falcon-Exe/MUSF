@@ -24,11 +24,14 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    useEffect(() => {
+        // Handle RTL for Arabic and Urdu
+        document.body.dir = (i18n.language === 'ar' || i18n.language === 'ur') ? 'rtl' : 'ltr';
+    }, [i18n.language]);
+
     const changeLanguage = (lng) => {
         i18n.changeLanguage(lng);
         setIsOpen(false);
-        // Handle RTL for Arabic and Urdu
-        document.body.dir = (lng === 'ar' || lng === 'ur') ? 'rtl' : 'ltr';
     };
 
     const links = [
@@ -38,7 +41,8 @@ const Navbar = () => {
         { name: t('nav.activities'), path: '/activities' },
         { name: t('nav.announcements'), path: '/announcements' },
         { name: t('nav.gallery'), path: '/gallery' },
-        { name: t('nav.contact'), path: '/contact' }
+        { name: t('nav.contact'), path: '/contact' },
+        { name: t('nav.support'), path: '/support' }
     ];
 
     const languages = [

@@ -1,6 +1,7 @@
 import React from 'react';
 import MemberCard from '../components/MemberCard';
 import SectionTitle from '../components/SectionTitle';
+import { FaUserTie } from 'react-icons/fa';
 import '../styles/Pages.css';
 import { leadershipData } from '../data/leaders';
 
@@ -10,12 +11,31 @@ const Leadership = () => {
     <div className="leadership-page section-bg-offwhite min-h-screen">
       <header className="page-header pattern-bg section-bg-green text-white">
         <div className="container relative z-10">
-          <h1 className="page-title text-white">Sub Committees</h1>
-          <p className="page-subtitle text-white">The specialized wings driving MUSF's diverse missions.</p>
+          <h1 className="page-title text-white">Union Leadership</h1>
+          <p className="page-subtitle text-white">The Executive Committee and Sub-Committees of MUSF.</p>
         </div>
       </header>
 
       <div className="container section">
+
+        {/* Executive Committee Section */}
+        <div className="leadership-category-section" style={{ marginBottom: '4rem' }}>
+          <SectionTitle 
+            title="Executive Committee" 
+            icon={<FaUserTie />} 
+            subtitle="The core administrative body steering MUSF initiatives." 
+          />
+          <div className="grid grid-4 leadership-section-grid">
+            {leadershipData.executive && leadershipData.executive.map(leader => (
+              <MemberCard
+                key={leader.id}
+                name={leader.name}
+                role={leader.role}
+                photo={leader.image}
+              />
+            ))}
+          </div>
+        </div>
 
         {/* Dynamic Departments Rendering */}
         {leadershipData.subCommittees && leadershipData.subCommittees.map((dept, index) => (

@@ -1,7 +1,8 @@
 import React from 'react';
+import { FiEdit2, FiTrash2 } from 'react-icons/fi';
 import '../styles/MemberCard.css';
 
-const MemberCard = ({ photo, name, role, department }) => {
+const MemberCard = ({ photo, name, role, department, isAdminMode, onEdit, onDelete }) => {
     const getInitialStyle = (name) => {
         const gradients = [
             'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
@@ -22,7 +23,17 @@ const MemberCard = ({ photo, name, role, department }) => {
     };
 
     return (
-        <div className="member-card">
+        <div className={`member-card ${isAdminMode ? 'admin-card-mode' : ''}`}>
+            {isAdminMode && (
+                <div className="member-card-admin-overlay">
+                    <button onClick={onEdit} className="admin-action-btn edit-btn" title="Edit Member">
+                        <FiEdit2 size={14} />
+                    </button>
+                    <button onClick={onDelete} className="admin-action-btn delete-btn" title="Delete Member">
+                        <FiTrash2 size={14} />
+                    </button>
+                </div>
+            )}
             <div className="member-photo-container">
                 {photo ? (
                     <img src={photo} alt={name} loading="lazy" className="member-photo-img" />

@@ -135,3 +135,54 @@
         font-size: 1.8rem;
     }
 }
+
+/* Admin controls styling */
+.member-card-admin-overlay {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.admin-action-btn {
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+    color: var(--color-white);
+    padding: 0;
+}
+
+.admin-action-btn.edit-btn {
+    background: var(--color-green);
+}
+
+.admin-action-btn.edit-btn:hover {
+    background: var(--color-gold);
+    transform: scale(1.1);
+}
+
+.admin-action-btn.delete-btn {
+    background: #ef4444;
+}
+
+.admin-action-btn.delete-btn:hover {
+    background: #dc2626;
+    transform: scale(1.1);
+}
+
+.admin-card-mode {
+    border: 2px dashed rgba(6, 78, 59, 0.3) !important;
+}
+
+.admin-card-mode:hover {
+    border-color: var(--color-gold) !important;
+}

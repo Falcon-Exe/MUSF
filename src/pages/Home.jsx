@@ -23,6 +23,21 @@ const Home = () => {
     resetFormStatus
   } = useContactForm(contactData.formEndpoint);
 
+  const [executiveLeaders] = React.useState(() => {
+    const saved = localStorage.getItem('musf_leaders');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (parsed && parsed.executive) {
+          return parsed.executive;
+        }
+      } catch (e) {
+        console.error("Error loading saved leaders in Home", e);
+      }
+    }
+    return leadershipData.executive;
+  });
+
 
 
   const stats = [
@@ -150,7 +165,7 @@ const Home = () => {
         <div className="container">
           <h2 className="section-title">Leadership</h2>
           <div className="grid grid-4 leaders-grid">
-            {leadershipData.executive.slice(0, 6).map(leader => (
+            {executiveLeaders.slice(0, 6).map(leader => (
               <div key={leader.id} className="leader-card flex-col">
                 <div
                   className={`leader-photo-wrapper ${!leader.image ? 'image-failed' : ''}`}
